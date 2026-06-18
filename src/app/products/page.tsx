@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { ProductGrid } from "@/components/ProductGrid";
 import { categories, mockProducts } from "@/data/mock";
+import { getCurrentDemoRole } from "@/lib/demo-user";
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const role = await getCurrentDemoRole();
+
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
       <section className="border border-slate-200 bg-white p-6">
@@ -20,7 +23,7 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <ProductGrid title="المنتجات المتاحة" subtitle="كل الأصناف الأساسية لمتجر اكسسوارات موبايل عربي." products={mockProducts} />
+      <ProductGrid title="المنتجات المتاحة" subtitle="كل الأصناف الأساسية لمتجر اكسسوارات موبايل عربي." products={mockProducts} role={role} />
     </div>
   );
 }

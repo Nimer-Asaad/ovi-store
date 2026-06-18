@@ -1,13 +1,17 @@
 import Link from "next/link";
+import { PriceDisplay } from "@/components/PriceDisplay";
 import { formatPrice, mockProducts } from "@/data/mock";
+import { getCurrentDemoRole } from "@/lib/demo-user";
+import { getVisibleUnitPrice } from "@/lib/pricing";
 
 const cartItems = mockProducts.slice(0, 3).map((product, index) => ({
   product,
   quantity: index + 1,
 }));
 
-export default function CartPage() {
-  const total = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+export default async function CartPage() {
+  const role = await getCurrentDemoRole();
+  const total = cartItems.reduce((sum, item) => sum + getVisibleUnitPrice(item.product, role).finalAmount * item.quantity, 0);
 
   return (
     <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[1fr_360px] lg:px-8">
@@ -20,8 +24,11 @@ export default function CartPage() {
               <div>
                 <h2 className="font-black text-slate-950">{product.name}</h2>
                 <p className="mt-1 text-sm font-bold text-slate-500">الكمية: {quantity}</p>
+                <div className="mt-3">
+                  <PriceDisplay product={product} role={role} variant="line" />
+                </div>
               </div>
-              <p className="text-lg font-black text-slate-950">{formatPrice(product.price * quantity)}</p>
+              <p className="text-lg font-black text-slate-950">{formatPrice(getVisibleUnitPrice(product, role).finalAmount * quantity)}</p>
             </div>
           ))}
         </div>

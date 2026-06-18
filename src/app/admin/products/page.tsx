@@ -1,5 +1,6 @@
 import { AdminSidebar } from "@/components/AdminSidebar";
 import { formatPrice, mockProducts } from "@/data/mock";
+import { getProfitMargin } from "@/lib/pricing";
 
 export default function AdminProductsPage() {
   return (
@@ -16,14 +17,18 @@ export default function AdminProductsPage() {
 
         <div className="overflow-hidden border border-slate-200 bg-white">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[820px] text-right">
+            <table className="w-full min-w-[980px] text-right">
               <thead className="bg-slate-50 text-sm font-black text-slate-600">
                 <tr>
                   <th className="p-4">المنتج</th>
                   <th className="p-4">SKU</th>
                   <th className="p-4">القسم</th>
+                  <th className="p-4">التكلفة</th>
                   <th className="p-4">التجزئة</th>
-                  <th className="p-4">الجملة</th>
+                  <th className="p-4">التاجر</th>
+                  <th className="p-4">الموزع</th>
+                  <th className="p-4">الخصم</th>
+                  <th className="p-4">الهامش</th>
                   <th className="p-4">المخزون</th>
                 </tr>
               </thead>
@@ -33,8 +38,12 @@ export default function AdminProductsPage() {
                     <td className="p-4 font-black text-slate-950">{product.name}</td>
                     <td className="p-4">{product.sku}</td>
                     <td className="p-4">{product.categoryName}</td>
-                    <td className="p-4">{formatPrice(product.price)}</td>
-                    <td className="p-4 text-teal-700">{formatPrice(product.wholesale)}</td>
+                    <td className="p-4 text-rose-700">{formatPrice(product.costPrice)}</td>
+                    <td className="p-4">{formatPrice(product.retailPrice)}</td>
+                    <td className="p-4 text-teal-700">{formatPrice(product.wholesalePrice)}</td>
+                    <td className="p-4">{product.dealerPrice ? formatPrice(product.dealerPrice) : "غير محدد"}</td>
+                    <td className="p-4">{product.discountPercent}%</td>
+                    <td className="p-4 text-teal-700">{getProfitMargin(product).percent}%</td>
                     <td className="p-4">{product.stock}</td>
                   </tr>
                 ))}

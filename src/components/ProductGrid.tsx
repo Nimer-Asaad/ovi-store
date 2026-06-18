@@ -1,14 +1,17 @@
 import { ProductCard } from "@/components/ProductCard";
 import type { Product } from "@/data/mock";
+import type { DemoViewerRole } from "@/lib/demo-user";
 
 export function ProductGrid({
   title,
   subtitle,
   products,
+  role,
 }: {
   title: string;
   subtitle?: string;
   products: Product[];
+  role: DemoViewerRole;
 }) {
   return (
     <section>
@@ -21,7 +24,7 @@ export function ProductGrid({
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
-          <ProductCard key={product.slug} product={product} />
+          <ProductCard key={product.slug} product={product} role={role} />
         ))}
       </div>
     </section>

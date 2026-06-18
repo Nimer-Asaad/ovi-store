@@ -3,8 +3,10 @@ import { HeroSection } from "@/components/HeroSection";
 import { ProductGrid } from "@/components/ProductGrid";
 import { PromoBanner } from "@/components/PromoBanner";
 import { categories, mockProducts } from "@/data/mock";
+import { getCurrentDemoRole } from "@/lib/demo-user";
 
-export default function Home() {
+export default async function Home() {
+  const role = await getCurrentDemoRole();
   const featured = mockProducts.filter((product) => product.featured);
 
   return (
@@ -36,6 +38,7 @@ export default function Home() {
         title="منتجات مختارة"
         subtitle="تشكيلة جاهزة للعرض بالجملة والتجزئة مع أسعار تجريبية."
         products={featured}
+        role={role}
       />
     </div>
   );

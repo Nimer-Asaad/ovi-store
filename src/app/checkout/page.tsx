@@ -1,7 +1,11 @@
 import { formatPrice, mockProducts } from "@/data/mock";
+import { getCurrentDemoRole } from "@/lib/demo-user";
+import { getVisibleUnitPrice } from "@/lib/pricing";
 
-export default function CheckoutPage() {
-  const total = mockProducts.slice(0, 3).reduce((sum, product) => sum + product.price, 0);
+export default async function CheckoutPage() {
+  const role = await getCurrentDemoRole();
+  const checkoutItems = mockProducts.slice(0, 3);
+  const total = checkoutItems.reduce((sum, product) => sum + getVisibleUnitPrice(product, role).finalAmount, 0);
 
   return (
     <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[1fr_360px] lg:px-8">
@@ -25,6 +29,14 @@ export default function CheckoutPage() {
       <aside className="h-fit border border-slate-200 bg-white p-6">
         <h2 className="text-xl font-black text-slate-950">طلبك</h2>
         <p className="mt-3 text-sm leading-7 text-slate-600">الدفع عند الاستلام حاليا. سيتم ربط بوابات الدفع لاحقا.</p>
+        <div className="mt-5 grid gap-3 border-t border-slate-200 pt-4">
+          {checkoutItems.map((product) => (
+            <div key={product.slug} className="flex justify-between gap-3 text-sm font-bold text-slate-600">
+              <span>{product.name}</span>
+              <span className="text-slate-950">{formatPrice(getVisibleUnitPrice(product, role).finalAmount)}</span>
+            </div>
+          ))}
+        </div>
         <div className="mt-5 flex justify-between border-t border-slate-200 pt-4 text-lg font-black">
           <span>الإجمالي</span>
           <span>{formatPrice(total + 20)}</span>

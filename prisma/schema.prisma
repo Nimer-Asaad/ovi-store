@@ -23,8 +23,11 @@ model Product {
   slug        String      @unique
   sku         String      @unique
   description String
-  price       Int
-  wholesale   Int
+  costPrice   Int
+  retailPrice Int
+  wholesalePrice Int
+  dealerPrice Int?
+  discountPercent Int @default(0)
   stock       Int         @default(0)
   featured    Boolean     @default(false)
   categoryId  String
@@ -68,8 +71,12 @@ model OrderItem {
 }
 
 enum Role {
-  CUSTOMER
   ADMIN
+  CUSTOMER
+  MERCHANT
+  DEALER
+  SALES_REP
+  SUPPLIER
 }
 
 enum OrderStatus {

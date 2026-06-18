@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Star } from "lucide-react";
-import { formatPrice, type Product } from "@/data/mock";
+import { PriceDisplay } from "@/components/PriceDisplay";
+import type { Product } from "@/data/mock";
+import type { DemoViewerRole } from "@/lib/demo-user";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, role }: { product: Product; role: DemoViewerRole }) {
   return (
     <article className="group flex h-full flex-col border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-teal-300 hover:shadow-md">
       <Link href={`/products/${product.slug}`} className="block">
@@ -28,16 +30,7 @@ export function ProductCard({ product }: { product: Product }) {
           <span>المخزون {product.stock}</span>
         </div>
         <div className="mt-auto pt-4">
-          <div className="flex items-end justify-between gap-3">
-            <div>
-              <p className="text-xs font-bold text-slate-500">سعر التجزئة</p>
-              <p className="text-xl font-black text-slate-950">{formatPrice(product.price)}</p>
-            </div>
-            <div className="text-left">
-              <p className="text-xs font-bold text-slate-500">الجملة</p>
-              <p className="text-sm font-black text-teal-700">{formatPrice(product.wholesale)}</p>
-            </div>
-          </div>
+          <PriceDisplay product={product} role={role} />
           <button className="mt-4 h-11 w-full bg-slate-950 text-sm font-black text-white transition hover:bg-teal-700">
             إضافة للسلة
           </button>

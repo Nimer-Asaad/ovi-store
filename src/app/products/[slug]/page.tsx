@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PriceDisplay } from "@/components/PriceDisplay";
 import { ProductGrid } from "@/components/ProductGrid";
-import { formatPrice, getProduct, mockProducts } from "@/data/mock";
+import { getProduct, mockProducts } from "@/data/mock";
+import { getCurrentDemoRole } from "@/lib/demo-user";
 
 export function generateStaticParams() {
   return mockProducts.map((product) => ({ slug: product.slug }));
 }
 
 export default async function ProductDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const role = await getCurrentDemoRole();
   const { slug } = await params;
   const product = getProduct(slug);
 
@@ -38,19 +41,8 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
               </span>
             ))}
           </div>
-          <div className="mt-7 flex flex-col gap-4 border-y border-slate-200 py-5 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm font-bold text-slate-500">سعر التجزئة</p>
-              <p className="text-3xl font-black text-slate-950">{formatPrice(product.price)}</p>
-            </div>
-            <div>
-              <p className="text-sm font-bold text-slate-500">سعر الجملة</p>
-              <p className="text-2xl font-black text-teal-700">{formatPrice(product.wholesale)}</p>
-            </div>
-            <div>
-              <p className="text-sm font-bold text-slate-500">المخزون</p>
-              <p className="text-2xl font-black text-slate-950">{product.stock}</p>
-            </div>
+          <div className="mt-7 border-y border-slate-200 py-5">
+            <PriceDisplay product={product} role={role} variant="details" />
           </div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <button className="h-12 bg-teal-600 px-8 text-sm font-black text-white transition hover:bg-teal-700">إضافة للسلة</button>
@@ -61,7 +53,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
         </div>
       </section>
 
-      {related.length > 0 ? <ProductGrid title="منتجات مشابهة" products={related} /> : null}
+      {related.length > 0 ? <ProductGrid title="منتجات مشابهة" products={related} role={role} /> : null}
     </div>
   );
 }
