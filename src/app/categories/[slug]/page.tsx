@@ -16,7 +16,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
-  const products = mockProducts.filter((product) => product.categorySlug === category.slug);
+  const products = mockProducts.filter((product) => product.visible && product.categorySlug === category.slug);
 
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">

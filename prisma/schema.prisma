@@ -29,6 +29,8 @@ model Product {
   dealerPrice Int?
   discountPercent Int @default(0)
   stock       Int         @default(0)
+  lowStockThreshold Int @default(10)
+  visible     Boolean     @default(true)
   featured    Boolean     @default(false)
   categoryId  String
   category    Category    @relation(fields: [categoryId], references: [id])
@@ -81,8 +83,9 @@ enum Role {
 
 enum OrderStatus {
   PENDING
-  PROCESSING
-  SHIPPED
+  UNDER_REVIEW
+  CONFIRMED
+  PREPARING
   DELIVERED
   CANCELLED
 }

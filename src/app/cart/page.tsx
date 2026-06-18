@@ -4,7 +4,7 @@ import { formatPrice, mockProducts } from "@/data/mock";
 import { getCurrentDemoRole } from "@/lib/demo-user";
 import { getVisibleUnitPrice } from "@/lib/pricing";
 
-const cartItems = mockProducts.slice(0, 3).map((product, index) => ({
+const cartItems = mockProducts.filter((product) => product.visible).slice(0, 3).map((product, index) => ({
   product,
   quantity: index + 1,
 }));

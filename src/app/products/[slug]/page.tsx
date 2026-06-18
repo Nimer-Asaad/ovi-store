@@ -6,7 +6,7 @@ import { getProduct, mockProducts } from "@/data/mock";
 import { getCurrentDemoRole } from "@/lib/demo-user";
 
 export function generateStaticParams() {
-  return mockProducts.map((product) => ({ slug: product.slug }));
+  return mockProducts.filter((product) => product.visible).map((product) => ({ slug: product.slug }));
 }
 
 export default async function ProductDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -14,11 +14,11 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
   const { slug } = await params;
   const product = getProduct(slug);
 
-  if (!product) {
+  if (!product || !product.visible) {
     notFound();
   }
 
-  const related = mockProducts.filter((item) => item.categorySlug === product.categorySlug && item.slug !== product.slug);
+  const related = mockProducts.filter((item) => item.visible && item.categorySlug === product.categorySlug && item.slug !== product.slug);
 
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">

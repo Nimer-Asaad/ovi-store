@@ -5,6 +5,7 @@ import { getCurrentDemoRole } from "@/lib/demo-user";
 
 export default async function ProductsPage() {
   const role = await getCurrentDemoRole();
+  const visibleProducts = mockProducts.filter((product) => product.visible);
 
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
@@ -23,7 +24,7 @@ export default async function ProductsPage() {
         </div>
       </section>
 
-      <ProductGrid title="المنتجات المتاحة" subtitle="كل الأصناف الأساسية لمتجر اكسسوارات موبايل عربي." products={mockProducts} role={role} />
+      <ProductGrid title="المنتجات المتاحة" subtitle="كل الأصناف الأساسية لمتجر اكسسوارات موبايل عربي." products={visibleProducts} role={role} />
     </div>
   );
 }

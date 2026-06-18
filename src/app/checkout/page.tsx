@@ -4,7 +4,7 @@ import { getVisibleUnitPrice } from "@/lib/pricing";
 
 export default async function CheckoutPage() {
   const role = await getCurrentDemoRole();
-  const checkoutItems = mockProducts.slice(0, 3);
+  const checkoutItems = mockProducts.filter((product) => product.visible).slice(0, 3);
   const total = checkoutItems.reduce((sum, product) => sum + getVisibleUnitPrice(product, role).finalAmount, 0);
 
   return (

@@ -1,10 +1,15 @@
 import Link from "next/link";
-import { LayoutDashboard, Package, ReceiptText } from "lucide-react";
+import { Boxes, LayoutDashboard, Package, ReceiptText, Truck, UserCog, UsersRound, Warehouse } from "lucide-react";
 
 const links = [
   { href: "/admin", label: "نظرة عامة", icon: LayoutDashboard },
   { href: "/admin/products", label: "المنتجات", icon: Package },
   { href: "/admin/orders", label: "الطلبات", icon: ReceiptText },
+  { href: "/admin/customers", label: "العملاء", icon: UsersRound },
+  { href: "/admin/suppliers", label: "الموردون", icon: Truck },
+  { href: "/admin/sales-reps", label: "مندوبو المبيعات", icon: UserCog },
+  { href: "/admin/inventory", label: "المخزون", icon: Warehouse },
+  { href: "/admin/products/new", label: "إضافة منتج", icon: Boxes },
 ];
 
 export function AdminSidebar() {
