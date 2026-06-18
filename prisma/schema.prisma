@@ -8,35 +8,90 @@ datasource db {
 }
 
 model Category {
-  id          String    @id @default(cuid())
-  name        String
-  slug        String    @unique
-  description String?
-  products    Product[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id        String    @id @default(cuid())
+  nameAr    String
+  nameEn    String
+  slug      String    @unique
+  imageUrl  String?
+  isVisible Boolean   @default(true)
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Product {
-  id          String      @id @default(cuid())
-  name        String
-  slug        String      @unique
-  sku         String      @unique
-  description String
-  costPrice   Int
-  retailPrice Int
-  wholesalePrice Int
-  dealerPrice Int?
-  discountPercent Int @default(0)
-  stock       Int         @default(0)
-  lowStockThreshold Int @default(10)
-  visible     Boolean     @default(true)
-  featured    Boolean     @default(false)
-  categoryId  String
-  category    Category    @relation(fields: [categoryId], references: [id])
-  orderItems  OrderItem[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  id              String           @id @default(cuid())
+  nameAr          String
+  nameEn          String
+  slug            String           @unique
+  sku             String           @unique
+  barcode         String?
+  descriptionAr   String
+  costPrice       Int
+  retailPrice     Int
+  wholesalePrice  Int
+  dealerPrice     Int?
+  discountPercent Int              @default(0)
+  stock           Int              @default(0)
+  minStock        Int              @default(10)
+  isFeatured      Boolean          @default(false)
+  isNew           Boolean          @default(false)
+  isVisible       Boolean          @default(true)
+  categoryId      String
+  category        Category         @relation(fields: [categoryId], references: [id])
+  brandId         String
+  brand           Brand            @relation(fields: [brandId], references: [id])
+  supplierId      String
+  supplier        Supplier         @relation(fields: [supplierId], references: [id])
+  images          ProductImage[]
+  catalogs        ProductCatalog[]
+  orderItems      OrderItem[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  alt       String?
+  isMain    Boolean  @default(false)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model ProductCatalog {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  title     String
+  fileUrl   String
+  fileType  String
+  createdAt DateTime @default(now())
+}
+
+model Brand {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  logoUrl   String?
+  isVisible Boolean   @default(true)
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Supplier {
+  id        String    @id @default(cuid())
+  name      String
+  phone     String?
+  email     String?
+  address   String?
+  isActive  Boolean   @default(true)
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model User {

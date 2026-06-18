@@ -1,17 +1,17 @@
 import Link from "next/link";
 import { ArrowLeft, Minus, PackageCheck, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { PriceDisplay } from "@/components/PriceDisplay";
-import { formatPrice, mockProducts } from "@/data/mock";
+import { formatPrice } from "@/data/mock";
 import { getCurrentUser } from "@/lib/auth";
+import { getVisibleProducts } from "@/lib/catalog";
 import { getVisibleUnitPrice } from "@/lib/pricing";
 
-const cartItems = mockProducts.filter((product) => product.visible).slice(0, 3).map((product, index) => ({
-  product,
-  quantity: index + 1,
-}));
-
 export default async function CartPage() {
-  const currentUser = await getCurrentUser();
+  const [currentUser, products] = await Promise.all([getCurrentUser(), getVisibleProducts()]);
+  const cartItems = products.slice(0, 3).map((product, index) => ({
+    product,
+    quantity: index + 1,
+  }));
   const total = cartItems.reduce((sum, item) => sum + getVisibleUnitPrice(item.product, currentUser).finalAmount * item.quantity, 0);
 
   return (

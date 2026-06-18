@@ -19,8 +19,8 @@ import {
 } from "lucide-react";
 import { HeroSection } from "@/components/HeroSection";
 import { ProductCard } from "@/components/ProductCard";
-import { categories, mockProducts } from "@/data/mock";
 import { getCurrentUser } from "@/lib/auth";
+import { getFeaturedProducts, getVisibleCategoriesWithCounts, getVisibleProducts } from "@/lib/catalog";
 
 const categoryIcons = {
   "phone-cases": ShieldCheck,
@@ -64,10 +64,15 @@ const brands = ["MagShield", "GlassPro", "GaN Pro", "AirBeat", "PowerHub", "Smar
 
 export default async function Home() {
   const currentUser = await getCurrentUser();
-  const featured = mockProducts.filter((product) => product.visible && product.featured);
-  const newProducts = mockProducts.filter((product) => product.visible).slice(0, 4);
-  const bestSelling = mockProducts
-    .filter((product) => product.visible)
+  const [featuredProducts, products, categories] = await Promise.all([
+    getFeaturedProducts(),
+    getVisibleProducts(),
+    getVisibleCategoriesWithCounts(),
+  ]);
+  const featured = featuredProducts.length > 0 ? featuredProducts : products.slice(0, 4);
+  const newCandidates = products.filter((product) => product.badge === "جديد");
+  const newProducts = (newCandidates.length > 0 ? newCandidates : products).slice(0, 4);
+  const bestSelling = [...products]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 4);
 
@@ -107,10 +112,10 @@ export default async function Home() {
                     <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#fbf7ef] text-[#73572f] transition group-hover:bg-secondary group-hover:text-primary">
                       <Icon className="h-6 w-6" aria-hidden="true" />
                     </span>
-                    <span className="badge bg-[#fbf7ef] text-[#73572f]">{category.count} منتج</span>
+                    <span className="badge bg-[#fbf7ef] text-[#73572f]">{category._count.products} منتج</span>
                   </div>
-                  <h3 className="mt-5 text-xl font-black text-primary">{category.name}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted">{category.description}</p>
+                  <h3 className="mt-5 text-xl font-black text-primary">{category.nameAr}</h3>
+                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted">{category.nameEn}</p>
                 </Link>
               );
             })}

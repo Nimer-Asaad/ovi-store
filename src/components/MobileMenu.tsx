@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { categories } from "@/data/mock";
 import { roleLabels, type UserRole } from "@/lib/user-roles";
 
 type MobileMenuUser = {
@@ -13,7 +12,12 @@ type MobileMenuUser = {
   isApproved: boolean;
 };
 
-export function MobileMenu({ currentUser }: { currentUser: MobileMenuUser | null }) {
+type MobileMenuCategory = {
+  nameAr: string;
+  slug: string;
+};
+
+export function MobileMenu({ currentUser, categories }: { currentUser: MobileMenuUser | null; categories: MobileMenuCategory[] }) {
   const [open, setOpen] = useState(false);
 
   const authLinks = currentUser
@@ -88,7 +92,7 @@ export function MobileMenu({ currentUser }: { currentUser: MobileMenuUser | null
                     onClick={() => setOpen(false)}
                     className="rounded-xl bg-[#fbf7ef] px-3 py-2 text-sm font-bold text-[#73572f]"
                   >
-                    {category.name}
+                    {category.nameAr}
                   </Link>
                 ))}
               </div>

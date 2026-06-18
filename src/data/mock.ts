@@ -30,6 +30,8 @@ export type Product = {
   badge?: string;
   specs: string[];
   color: string;
+  imageUrl?: string;
+  brandName?: string;
 };
 
 export type OrderStatus = "pending" | "under_review" | "confirmed" | "preparing" | "delivered" | "cancelled";

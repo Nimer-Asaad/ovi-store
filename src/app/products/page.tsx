@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Filter, SlidersHorizontal, Sparkles } from "lucide-react";
 import { ProductGrid } from "@/components/ProductGrid";
-import { categories, mockProducts } from "@/data/mock";
 import { getCurrentUser } from "@/lib/auth";
+import { getVisibleCategoriesWithCounts, getVisibleProducts } from "@/lib/catalog";
 
 export default async function ProductsPage() {
   const currentUser = await getCurrentUser();
-  const visibleProducts = mockProducts.filter((product) => product.visible);
+  const [visibleProducts, categories] = await Promise.all([getVisibleProducts(), getVisibleCategoriesWithCounts()]);
 
   return (
     <main className="app-container flex flex-col gap-8 py-8 sm:py-10">
@@ -39,7 +39,7 @@ export default async function ProductsPage() {
                 href={`/categories/${category.slug}`}
                 className="shrink-0 rounded-full border border-border bg-slate-50 px-4 py-2 text-sm font-bold text-slate-700 transition hover:border-secondary/50 hover:bg-[#fbf7ef] hover:text-[#73572f]"
               >
-                {category.name}
+                {category.nameAr}
               </Link>
             ))}
           </div>

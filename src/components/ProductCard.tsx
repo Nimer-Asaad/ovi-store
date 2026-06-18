@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { ArrowLeft, PackageCheck, ShoppingCart, Star, Warehouse } from "lucide-react";
 import { PriceDisplay } from "@/components/PriceDisplay";
@@ -14,13 +15,17 @@ export function ProductCard({ product, viewer }: { product: Product; viewer: Pri
       <Link href={`/products/${product.slug}`} className="block p-3 pb-0" aria-label={product.name}>
         <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[1.1rem] bg-[linear-gradient(135deg,#0F172A,#1E293B_52%,#A8844F)] p-6 text-white">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgb(214_185_140/0.30),transparent_30%),linear-gradient(135deg,rgb(255_255_255/0.10),transparent_45%)]" />
-          <div className="absolute right-3 top-3 flex flex-wrap gap-2">
+          <div className="absolute right-3 top-3 z-10 flex flex-wrap gap-2">
             {product.featured ? <ProductBadge tone="dark">مميز</ProductBadge> : null}
             {product.discountPercent > 0 ? <ProductBadge tone="accent">خصم {product.discountPercent}%</ProductBadge> : null}
           </div>
-          <div className="relative grid h-24 w-24 place-items-center rounded-[1.45rem] border border-secondary/35 bg-white/15 text-2xl font-black text-[#f7ead2] shadow-lift backdrop-blur transition duration-300 group-hover:scale-105">
-            {product.categoryName.slice(0, 2)}
-          </div>
+          {product.imageUrl ? (
+            <Image src={product.imageUrl} alt={product.name} fill sizes="(max-width: 768px) 90vw, 25vw" className="object-cover transition duration-300 group-hover:scale-105" />
+          ) : (
+            <div className="relative grid h-24 w-24 place-items-center rounded-[1.45rem] border border-secondary/35 bg-white/15 text-2xl font-black text-[#f7ead2] shadow-lift backdrop-blur transition duration-300 group-hover:scale-105">
+              {product.categoryName.slice(0, 2)}
+            </div>
+          )}
         </div>
       </Link>
 

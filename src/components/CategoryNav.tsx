@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { categories } from "@/data/mock";
+import { getVisibleCategoriesWithCounts } from "@/lib/catalog";
 
-export function CategoryNav() {
+export async function CategoryNav() {
+  const categories = await getVisibleCategoriesWithCounts();
+
   return (
     <nav className="border-b border-border bg-white/85 backdrop-blur">
       <div className="app-container flex gap-2 overflow-x-auto py-3 [scrollbar-width:none]">
@@ -17,7 +19,7 @@ export function CategoryNav() {
             href={`/categories/${category.slug}`}
             className="shrink-0 rounded-full border border-border bg-slate-50/80 px-4 py-2 text-sm font-extrabold text-slate-700 transition hover:border-secondary/50 hover:bg-[#fbf7ef] hover:text-[#73572f]"
           >
-            {category.name}
+            {category.nameAr}
           </Link>
         ))}
       </div>

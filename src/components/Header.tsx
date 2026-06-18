@@ -5,10 +5,11 @@ import { ShoppingCart, UserRound } from "lucide-react";
 import { MobileMenu } from "@/components/MobileMenu";
 import { SearchBar } from "@/components/SearchBar";
 import { getCurrentUser, logoutUser } from "@/lib/auth";
+import { getVisibleCategoriesWithCounts } from "@/lib/catalog";
 import { roleLabels } from "@/lib/user-roles";
 
 export async function Header() {
-  const currentUser = await getCurrentUser();
+  const [currentUser, categories] = await Promise.all([getCurrentUser(), getVisibleCategoriesWithCounts()]);
 
   async function logoutAction() {
     "use server";
@@ -21,7 +22,7 @@ export async function Header() {
     <header className="sticky top-0 z-40 border-b border-border bg-white/95 shadow-[0_10px_35px_rgb(15_23_42/0.05)] backdrop-blur-xl">
       <div className="app-container grid grid-cols-[auto_1fr_auto] items-center gap-3 py-4 md:gap-6">
         <div className="flex items-center gap-3">
-          <MobileMenu currentUser={currentUser} />
+          <MobileMenu currentUser={currentUser} categories={categories.map((category) => ({ nameAr: category.nameAr, slug: category.slug }))} />
           <Link href="/" className="flex items-center gap-3">
             <span className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-[1.1rem] border border-secondary/30 bg-primary shadow-soft ring-1 ring-slate-900/5">
               <Image

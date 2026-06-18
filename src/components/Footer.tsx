@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { categories } from "@/data/mock";
+import { getVisibleCategoriesWithCounts } from "@/lib/catalog";
 
-export function Footer() {
+export async function Footer() {
+  const categories = await getVisibleCategoriesWithCounts();
+
   return (
     <footer className="mt-16 border-t border-slate-800 bg-primary text-white">
       <div className="app-container grid gap-10 py-12 md:grid-cols-[1.3fr_0.8fr_1fr_1fr]">
@@ -42,7 +44,7 @@ export function Footer() {
           <div className="mt-3 flex flex-wrap gap-2">
             {categories.slice(0, 6).map((category) => (
               <Link key={category.slug} href={`/categories/${category.slug}`} className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold text-slate-200 transition hover:border-secondary/40 hover:text-secondary">
-                {category.name}
+                {category.nameAr}
               </Link>
             ))}
           </div>

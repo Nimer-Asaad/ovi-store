@@ -1,8 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight, CreditCard, MapPin, PackageCheck, Phone, UserRound } from "lucide-react";
-import { formatPrice, mockProducts } from "@/data/mock";
+import { formatPrice } from "@/data/mock";
 import { getCurrentUser } from "@/lib/auth";
+import { getVisibleProducts } from "@/lib/catalog";
 import { getVisibleUnitPrice } from "@/lib/pricing";
 
 const customerFields = [
@@ -16,8 +17,8 @@ const shippingFields = [
 ];
 
 export default async function CheckoutPage() {
-  const currentUser = await getCurrentUser();
-  const checkoutItems = mockProducts.filter((product) => product.visible).slice(0, 3);
+  const [currentUser, products] = await Promise.all([getCurrentUser(), getVisibleProducts()]);
+  const checkoutItems = products.slice(0, 3);
   const total = checkoutItems.reduce((sum, product) => sum + getVisibleUnitPrice(product, currentUser).finalAmount, 0);
   const shipping = 20;
 

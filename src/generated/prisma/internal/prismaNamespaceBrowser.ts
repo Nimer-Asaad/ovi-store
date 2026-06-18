@@ -53,6 +53,10 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Category: 'Category',
   Product: 'Product',
+  ProductImage: 'ProductImage',
+  ProductCatalog: 'ProductCatalog',
+  Brand: 'Brand',
+  Supplier: 'Supplier',
   User: 'User',
   Session: 'Session',
   Order: 'Order',
@@ -74,9 +78,11 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const CategoryScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  nameAr: 'nameAr',
+  nameEn: 'nameEn',
   slug: 'slug',
-  description: 'description',
+  imageUrl: 'imageUrl',
+  isVisible: 'isVisible',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -86,25 +92,82 @@ export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typ
 
 export const ProductScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  nameAr: 'nameAr',
+  nameEn: 'nameEn',
   slug: 'slug',
   sku: 'sku',
-  description: 'description',
+  barcode: 'barcode',
+  descriptionAr: 'descriptionAr',
   costPrice: 'costPrice',
   retailPrice: 'retailPrice',
   wholesalePrice: 'wholesalePrice',
   dealerPrice: 'dealerPrice',
   discountPercent: 'discountPercent',
   stock: 'stock',
-  lowStockThreshold: 'lowStockThreshold',
-  visible: 'visible',
-  featured: 'featured',
+  minStock: 'minStock',
+  isFeatured: 'isFeatured',
+  isNew: 'isNew',
+  isVisible: 'isVisible',
   categoryId: 'categoryId',
+  brandId: 'brandId',
+  supplierId: 'supplierId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const ProductImageScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  url: 'url',
+  alt: 'alt',
+  isMain: 'isMain',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type ProductImageScalarFieldEnum = (typeof ProductImageScalarFieldEnum)[keyof typeof ProductImageScalarFieldEnum]
+
+
+export const ProductCatalogScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  title: 'title',
+  fileUrl: 'fileUrl',
+  fileType: 'fileType',
+  createdAt: 'createdAt'
+} as const
+
+export type ProductCatalogScalarFieldEnum = (typeof ProductCatalogScalarFieldEnum)[keyof typeof ProductCatalogScalarFieldEnum]
+
+
+export const BrandScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  logoUrl: 'logoUrl',
+  isVisible: 'isVisible',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof BrandScalarFieldEnum]
+
+
+export const SupplierScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  address: 'address',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SupplierScalarFieldEnum = (typeof SupplierScalarFieldEnum)[keyof typeof SupplierScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

@@ -1,26 +1,28 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
 import { ArrowLeft, BadgePercent, CheckCircle2, PackageCheck, ShieldCheck, ShoppingCart, Star, Truck } from "lucide-react";
 import { notFound } from "next/navigation";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import { ProductGrid } from "@/components/ProductGrid";
-import { getProduct, mockProducts } from "@/data/mock";
 import { getCurrentUser } from "@/lib/auth";
+import { getStorefrontProduct, getVisibleProducts } from "@/lib/catalog";
 
-export function generateStaticParams() {
-  return mockProducts.filter((product) => product.visible).map((product) => ({ slug: product.slug }));
+export async function generateStaticParams() {
+  const products = await getVisibleProducts();
+  return products.map((product) => ({ slug: product.slug }));
 }
 
 export default async function ProductDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const currentUser = await getCurrentUser();
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getStorefrontProduct(slug);
 
-  if (!product || !product.visible) {
+  if (!product) {
     notFound();
   }
 
-  const related = mockProducts.filter((item) => item.visible && item.categorySlug === product.categorySlug && item.slug !== product.slug);
+  const related = (await getVisibleProducts()).filter((item) => item.categorySlug === product.categorySlug && item.slug !== product.slug).slice(0, 4);
   const isLowStock = product.stock <= product.lowStockThreshold;
 
   return (
@@ -29,13 +31,17 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
         <div className="surface-panel overflow-hidden p-3">
           <div className="relative flex min-h-[28rem] items-center justify-center overflow-hidden rounded-[1.5rem] bg-[linear-gradient(135deg,#0F172A,#111827_48%,#A8844F)] p-8 text-white">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_26%_24%,rgb(214_185_140/0.30),transparent_28%),linear-gradient(145deg,rgb(255_255_255/0.12),transparent_48%)]" />
-            <div className="absolute right-5 top-5 flex flex-wrap gap-2">
+            <div className="absolute right-5 top-5 z-10 flex flex-wrap gap-2">
               {product.featured ? <span className="badge bg-primary/80 text-white backdrop-blur">مميز</span> : null}
               {product.discountPercent > 0 ? <span className="badge bg-accent text-white">خصم {product.discountPercent}%</span> : null}
             </div>
-            <div className="relative grid h-44 w-44 place-items-center rounded-[2rem] border border-secondary/35 bg-white/15 text-5xl font-black text-[#f7ead2] shadow-lift backdrop-blur">
-              {product.categoryName.slice(0, 2)}
-            </div>
+            {product.imageUrl ? (
+              <Image src={product.imageUrl} alt={product.name} fill sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover" priority />
+            ) : (
+              <div className="relative grid h-44 w-44 place-items-center rounded-[2rem] border border-secondary/35 bg-white/15 text-5xl font-black text-[#f7ead2] shadow-lift backdrop-blur">
+                {product.categoryName.slice(0, 2)}
+              </div>
+            )}
           </div>
           <div className="grid gap-3 p-3 sm:grid-cols-3">
             <InfoPill Icon={ShieldCheck} title="جودة مختارة" />
