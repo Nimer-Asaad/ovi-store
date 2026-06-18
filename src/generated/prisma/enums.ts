@@ -21,6 +21,16 @@ export const Role = {
 export type Role = (typeof Role)[keyof typeof Role]
 
 
+export const PriceGroup = {
+  RETAIL: 'RETAIL',
+  WHOLESALE: 'WHOLESALE',
+  DEALER: 'DEALER',
+  VIP: 'VIP'
+} as const
+
+export type PriceGroup = (typeof PriceGroup)[keyof typeof PriceGroup]
+
+
 export const OrderStatus = {
   PENDING: 'PENDING',
   UNDER_REVIEW: 'UNDER_REVIEW',

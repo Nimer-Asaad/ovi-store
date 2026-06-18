@@ -54,6 +54,7 @@ export const ModelName = {
   Category: 'Category',
   Product: 'Product',
   User: 'User',
+  Session: 'Session',
   Order: 'Order',
   OrderItem: 'OrderItem'
 } as const
@@ -110,13 +111,29 @@ export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
-  password: 'password',
+  passwordHash: 'passwordHash',
+  phone: 'phone',
   role: 'role',
+  priceGroup: 'priceGroup',
+  isApproved: 'isApproved',
+  isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const SessionScalarFieldEnum = {
+  id: 'id',
+  tokenHash: 'tokenHash',
+  userId: 'userId',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
 export const OrderScalarFieldEnum = {

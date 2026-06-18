@@ -1,9 +1,18 @@
 import { Phone, Truck, WalletCards } from "lucide-react";
-import { DemoRoleSwitcher } from "@/components/DemoRoleSwitcher";
-import { getCurrentDemoRole } from "@/lib/demo-user";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getCurrentUser, logoutUser } from "@/lib/auth";
+import { roleLabels } from "@/lib/user-roles";
 
 export async function TopBar() {
-  const currentRole = await getCurrentDemoRole();
+  const currentUser = await getCurrentUser();
+
+  async function logoutAction() {
+    "use server";
+
+    await logoutUser();
+    redirect("/");
+  }
 
   return (
     <div className="border-b border-white/10 bg-primary text-white">
@@ -22,7 +31,20 @@ export async function TopBar() {
           <WalletCards className="h-4 w-4 text-accent" aria-hidden="true" />
           <span>أسعار جملة عند طلب 10 قطع أو أكثر</span>
         </div>
-        <DemoRoleSwitcher currentRole={currentRole} />
+        {currentUser ? (
+          <form action={logoutAction} className="flex items-center gap-2">
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-slate-200">
+              {currentUser.name} - {roleLabels[currentUser.role]}
+            </span>
+            <button type="submit" className="rounded-full border border-white/10 px-3 py-1 text-white transition hover:border-secondary/50 hover:text-secondary">
+              خروج
+            </button>
+          </form>
+        ) : (
+          <Link href="/login" className="rounded-full border border-white/10 px-3 py-1 text-white transition hover:border-secondary/50 hover:text-secondary">
+            تسجيل الدخول
+          </Link>
+        )}
       </div>
     </div>
   );

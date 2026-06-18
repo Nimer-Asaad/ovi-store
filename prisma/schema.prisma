@@ -40,12 +40,27 @@ model Product {
 }
 
 model User {
+  id           String     @id @default(cuid())
+  name         String
+  email        String     @unique
+  passwordHash String
+  phone        String?
+  role         Role       @default(CUSTOMER)
+  priceGroup   PriceGroup @default(RETAIL)
+  isApproved   Boolean    @default(false)
+  isActive     Boolean    @default(true)
+  orders       Order[]
+  sessions     Session[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Session {
   id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  password  String
-  role      Role     @default(CUSTOMER)
-  orders    Order[]
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -79,6 +94,13 @@ enum Role {
   DEALER
   SALES_REP
   SUPPLIER
+}
+
+enum PriceGroup {
+  RETAIL
+  WHOLESALE
+  DEALER
+  VIP
 }
 
 enum OrderStatus {
