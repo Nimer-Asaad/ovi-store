@@ -3,8 +3,14 @@ import { categories } from "@/data/mock";
 
 export function CategoryNav() {
   return (
-    <nav className="border-b border-border bg-white/80 backdrop-blur">
-      <div className="app-container flex gap-2 overflow-x-auto py-3">
+    <nav className="border-b border-border bg-white/85 backdrop-blur">
+      <div className="app-container flex gap-2 overflow-x-auto py-3 [scrollbar-width:none]">
+        <Link
+          href="/products"
+          className="shrink-0 rounded-full border border-secondary/25 bg-teal-50 px-4 py-2 text-sm font-extrabold text-teal-800 transition hover:bg-teal-100"
+        >
+          كل المنتجات
+        </Link>
         {categories.map((category) => (
           <Link
             key={category.slug}
