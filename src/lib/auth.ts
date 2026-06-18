@@ -35,6 +35,26 @@ export type RegisterUserInput = {
   isApproved?: boolean;
 };
 
+export function getRoleLandingPath(user: Pick<AuthUser, "role" | "isApproved">) {
+  if (!user.isApproved) {
+    return "/pending-approval";
+  }
+
+  switch (user.role) {
+    case "ADMIN":
+      return "/admin";
+    case "MERCHANT":
+    case "DEALER":
+      return "/merchant";
+    case "SALES_REP":
+      return "/sales-rep";
+    case "SUPPLIER":
+      return "/supplier";
+    default:
+      return "/";
+  }
+}
+
 export async function loginUser(email: string, password: string): Promise<AuthResult> {
   const normalizedEmail = normalizeEmail(email);
 
@@ -54,10 +74,6 @@ export async function loginUser(email: string, password: string): Promise<AuthRe
     return { ok: false, error: "هذا الحساب غير فعال." };
   }
 
-  if (!user.isApproved) {
-    return { ok: false, error: "الحساب بانتظار الموافقة." };
-  }
-
   await createUserSession(user.id);
 
   return { ok: true, user: toAuthUser(user) };
@@ -66,7 +82,7 @@ export async function loginUser(email: string, password: string): Promise<AuthRe
 export async function registerUser(data: RegisterUserInput): Promise<AuthResult> {
   const normalizedEmail = normalizeEmail(data.email);
   const role = data.role ?? "CUSTOMER";
-  const priceGroup = data.priceGroup ?? (role === "DEALER" ? "DEALER" : role === "MERCHANT" ? "WHOLESALE" : "RETAIL");
+  const priceGroup = data.priceGroup ?? getDefaultPriceGroup(role);
 
   if (!data.name.trim() || !normalizedEmail || data.password.length < 8) {
     return { ok: false, error: "الاسم والبريد وكلمة مرور من 8 أحرف على الأقل مطلوبة." };
@@ -74,6 +90,10 @@ export async function registerUser(data: RegisterUserInput): Promise<AuthResult>
 
   if (!isUserRole(role) || !isPriceGroup(priceGroup)) {
     return { ok: false, error: "نوع الحساب غير صالح." };
+  }
+
+  if (role === "ADMIN" || role === "SALES_REP") {
+    return { ok: false, error: "لا يمكن إنشاء هذا النوع من الحسابات بشكل عام." };
   }
 
   const passwordHash = await bcrypt.hash(data.password, 12);
@@ -93,9 +113,7 @@ export async function registerUser(data: RegisterUserInput): Promise<AuthResult>
       },
     });
 
-    if (user.isApproved) {
-      await createUserSession(user.id);
-    }
+    await createUserSession(user.id);
 
     return { ok: true, user: toAuthUser(user) };
   } catch {
@@ -131,8 +149,22 @@ export async function requireRole(roles: UserRole | UserRole[]) {
   const user = await requireAuth();
   const allowedRoles = Array.isArray(roles) ? roles : [roles];
 
+  if (!user.isApproved) {
+    redirect("/pending-approval");
+  }
+
   if (!allowedRoles.includes(user.role)) {
     redirect("/");
+  }
+
+  return user;
+}
+
+export async function requireApprovedUser() {
+  const user = await requireAuth();
+
+  if (!user.isApproved) {
+    redirect("/pending-approval");
   }
 
   return user;
@@ -144,6 +176,19 @@ function normalizeEmail(email: string) {
 
 function isPriceGroup(value: string): value is PriceGroup {
   return priceGroups.includes(value as PriceGroup);
+}
+
+function getDefaultPriceGroup(role: UserRole): PriceGroup {
+  switch (role) {
+    case "MERCHANT":
+      return "WHOLESALE";
+    case "DEALER":
+      return "DEALER";
+    case "SUPPLIER":
+      return "VIP";
+    default:
+      return "RETAIL";
+  }
 }
 
 function toAuthUser(user: {

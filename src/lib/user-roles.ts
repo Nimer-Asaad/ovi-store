@@ -2,12 +2,14 @@ export const userRoles = ["ADMIN", "CUSTOMER", "MERCHANT", "DEALER", "SALES_REP"
 
 export type UserRole = (typeof userRoles)[number];
 
+export const publicRegistrationRoles = ["CUSTOMER", "MERCHANT", "DEALER", "SUPPLIER"] as const satisfies readonly UserRole[];
+
 export const roleLabels: Record<UserRole | "GUEST", string> = {
   GUEST: "زائر",
   ADMIN: "مدير",
   CUSTOMER: "عميل",
   MERCHANT: "تاجر",
-  DEALER: "موزع",
+  DEALER: "وكيل",
   SALES_REP: "مندوب مبيعات",
   SUPPLIER: "مورد",
 };

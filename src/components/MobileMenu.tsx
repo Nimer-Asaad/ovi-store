@@ -5,9 +5,29 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { categories } from "@/data/mock";
+import { roleLabels, type UserRole } from "@/lib/user-roles";
 
-export function MobileMenu() {
+type MobileMenuUser = {
+  name: string;
+  role: UserRole;
+  isApproved: boolean;
+};
+
+export function MobileMenu({ currentUser }: { currentUser: MobileMenuUser | null }) {
   const [open, setOpen] = useState(false);
+
+  const authLinks = currentUser
+    ? [
+        ["حسابي", "/account"],
+        currentUser.role === "ADMIN" ? ["لوحة الإدارة", "/admin"] : null,
+        currentUser.role === "MERCHANT" || currentUser.role === "DEALER" ? ["لوحة التاجر", "/merchant"] : null,
+        currentUser.role === "SUPPLIER" ? ["لوحة المورد", "/supplier"] : null,
+        currentUser.role === "SALES_REP" ? ["لوحة المندوب", "/sales-rep"] : null,
+      ].filter(Boolean) as Array<[string, string]>
+    : [
+        ["دخول", "/login"],
+        ["إنشاء حساب", "/register"],
+      ];
 
   return (
     <div className="md:hidden">
@@ -45,8 +65,7 @@ export function MobileMenu() {
                 ["الرئيسية", "/"],
                 ["المنتجات", "/products"],
                 ["السلة", "/cart"],
-                ["حسابي", "/account"],
-                ["لوحة الإدارة", "/admin"],
+                ...authLinks,
               ].map(([label, href]) => (
                 <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl border-b border-slate-100 px-3 py-3 text-slate-800 transition hover:bg-[#fbf7ef] hover:text-[#73572f]">
                   {label}
@@ -56,6 +75,11 @@ export function MobileMenu() {
 
             <div className="mt-8">
               <p className="text-sm font-black text-muted">الأقسام</p>
+              {currentUser ? (
+                <p className="mt-2 text-xs font-bold text-muted">
+                  {currentUser.name} - {roleLabels[currentUser.role]}{currentUser.isApproved ? "" : " - بانتظار الموافقة"}
+                </p>
+              ) : null}
               <div className="mt-3 grid grid-cols-2 gap-2">
                 {categories.slice(0, 8).map((category) => (
                   <Link
