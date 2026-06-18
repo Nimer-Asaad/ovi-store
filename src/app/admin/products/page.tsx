@@ -5,24 +5,24 @@ import { getProfitMargin } from "@/lib/pricing";
 
 export default function AdminProductsPage() {
   return (
-    <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[260px_1fr] lg:px-8">
+    <div className="app-container grid gap-6 py-8 lg:grid-cols-[260px_1fr]">
       <AdminSidebar />
       <section className="grid gap-6">
-        <div className="flex flex-col gap-4 border border-slate-200 bg-white p-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="surface-panel flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm font-black text-teal-700">إدارة المنتجات</p>
-            <h1 className="mt-2 text-3xl font-black text-slate-950">المنتجات</h1>
-            <p className="mt-2 text-sm text-slate-600">إضافة وتعديل الأسعار، التكلفة، المخزون، وحالة الظهور.</p>
+            <p className="badge-primary w-fit">إدارة المنتجات</p>
+            <h1 className="mt-4 text-3xl font-black text-primary">المنتجات</h1>
+            <p className="mt-2 text-sm text-muted">إضافة وتعديل الأسعار، التكلفة، المخزون، وحالة الظهور.</p>
           </div>
-          <Link href="/admin/products/new" className="h-11 bg-teal-600 px-5 py-3 text-sm font-black text-white hover:bg-teal-700">
+          <Link href="/admin/products/new" className="btn-secondary">
             إضافة منتج
           </Link>
         </div>
 
-        <div className="overflow-hidden border border-slate-200 bg-white">
+        <div className="surface-panel overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[1180px] text-right">
-              <thead className="bg-slate-50 text-sm font-black text-slate-600">
+              <thead className="bg-slate-50 text-sm font-black text-muted">
                 <tr>
                   <th className="p-4">المنتج</th>
                   <th className="p-4">SKU</th>
@@ -41,7 +41,7 @@ export default function AdminProductsPage() {
               <tbody className="divide-y divide-slate-100 text-sm font-bold text-slate-700">
                 {mockProducts.map((product) => (
                   <tr key={product.id}>
-                    <td className="p-4 font-black text-slate-950">{product.name}</td>
+                    <td className="p-4 font-black text-primary">{product.name}</td>
                     <td className="p-4">{product.sku}</td>
                     <td className="p-4">{product.categoryName}</td>
                     <td className="p-4 text-rose-700">{formatPrice(product.costPrice)}</td>
@@ -58,13 +58,13 @@ export default function AdminProductsPage() {
                     </td>
                     <td className="p-4">
                       <div className="flex flex-wrap gap-2">
-                        <Link href={`/admin/products/${product.id}/edit`} className="bg-slate-950 px-3 py-2 text-xs font-black text-white hover:bg-teal-700">
+                        <Link href={`/admin/products/${product.id}/edit`} className="rounded-lg bg-primary px-3 py-2 text-xs font-black text-white hover:bg-teal-700">
                           تعديل
                         </Link>
-                        <button type="button" className="border border-slate-200 px-3 py-2 text-xs font-black text-slate-700 hover:border-teal-300 hover:text-teal-700">
+                        <button type="button" className="rounded-lg border border-border px-3 py-2 text-xs font-black text-slate-700 hover:border-teal-300 hover:text-teal-700">
                           {product.visible ? "إخفاء" : "إظهار"}
                         </button>
-                        <button type="button" className="border border-rose-200 px-3 py-2 text-xs font-black text-rose-700 hover:bg-rose-50">
+                        <button type="button" className="rounded-lg border border-rose-200 px-3 py-2 text-xs font-black text-rose-700 hover:bg-rose-50">
                           حذف
                         </button>
                       </div>

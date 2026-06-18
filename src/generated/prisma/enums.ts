@@ -10,8 +10,12 @@
 */
 
 export const Role = {
+  ADMIN: 'ADMIN',
   CUSTOMER: 'CUSTOMER',
-  ADMIN: 'ADMIN'
+  MERCHANT: 'MERCHANT',
+  DEALER: 'DEALER',
+  SALES_REP: 'SALES_REP',
+  SUPPLIER: 'SUPPLIER'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
@@ -19,8 +23,9 @@ export type Role = (typeof Role)[keyof typeof Role]
 
 export const OrderStatus = {
   PENDING: 'PENDING',
-  PROCESSING: 'PROCESSING',
-  SHIPPED: 'SHIPPED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  CONFIRMED: 'CONFIRMED',
+  PREPARING: 'PREPARING',
   DELIVERED: 'DELIVERED',
   CANCELLED: 'CANCELLED'
 } as const

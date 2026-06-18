@@ -10,23 +10,23 @@ export default async function Home() {
   const featured = mockProducts.filter((product) => product.visible && product.featured);
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-6 sm:px-6 lg:px-8">
+    <div className="app-container flex flex-col gap-10 py-8">
       <HeroSection />
       <PromoBanner />
 
-      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {categories.slice(0, 4).map((category) => (
           <Link
             key={category.slug}
             href={`/categories/${category.slug}`}
-            className="group border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-teal-300 hover:shadow-md"
+            className="surface-card group p-5 transition duration-300 hover:-translate-y-1 hover:border-secondary/40 hover:shadow-card"
           >
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm font-semibold text-teal-700">{category.count} منتج</p>
-                <h2 className="mt-2 text-xl font-black text-slate-950">{category.name}</h2>
+                <p className="text-sm font-extrabold text-secondary">{category.count} منتج</p>
+                <h2 className="mt-2 text-xl font-black text-primary">{category.name}</h2>
               </div>
-              <span className="flex h-12 w-12 items-center justify-center bg-slate-950 text-lg font-black text-white transition group-hover:bg-teal-600">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-lg font-black text-white shadow-soft transition group-hover:bg-secondary">
                 {category.short}
               </span>
             </div>

@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
+import { Cairo } from "next/font/google";
 import { CategoryNav } from "@/components/CategoryNav";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { TopBar } from "@/components/TopBar";
 import "./globals.css";
+
+const cairo = Cairo({
+  subsets: ["arabic", "latin"],
+  variable: "--font-cairo",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "OVI Store | اكسسوارات موبايل بالجملة والتجزئة",
@@ -16,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className="h-full">
-      <body className="flex min-h-full flex-col bg-[#f6f8fb] text-slate-950 antialiased">
+    <html lang="ar" dir="rtl" className={cairo.variable}>
+      <body className="flex min-h-full flex-col antialiased">
         <TopBar />
         <Header />
         <CategoryNav />

@@ -16,13 +16,13 @@ export default function AdminPage() {
   const lowStockProducts = mockProducts.filter((product) => product.stock <= product.lowStockThreshold).length;
 
   return (
-    <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[260px_1fr] lg:px-8">
+    <div className="app-container grid gap-6 py-8 lg:grid-cols-[260px_1fr]">
       <AdminSidebar />
       <section className="grid gap-6">
-        <div className="border border-slate-200 bg-white p-6">
-          <p className="text-sm font-black text-teal-700">إدارة المتجر</p>
-          <h1 className="mt-2 text-3xl font-black text-slate-950">لوحة التحكم</h1>
-          <p className="mt-3 text-sm leading-7 text-slate-600">مراجعة سريعة للطلبات، المبيعات، الربحية، العملاء، والمخزون.</p>
+        <div className="surface-panel p-6 sm:p-8">
+          <p className="badge-primary w-fit">إدارة المتجر</p>
+          <h1 className="mt-4 text-3xl font-black text-primary">لوحة التحكم</h1>
+          <p className="mt-3 text-sm leading-7 text-muted">مراجعة سريعة للطلبات، المبيعات، الربحية، العملاء، والمخزون.</p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -37,19 +37,19 @@ export default function AdminPage() {
           <AdminStatCard title="ربح تقديري" value={formatPrice(estimatedProfit)} hint="حسب تكلفة المنتجات" icon={TrendingUp} />
         </div>
 
-        <div className="overflow-hidden border border-slate-200 bg-white">
-          <div className="flex flex-col gap-3 border-b border-slate-200 p-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="surface-panel overflow-hidden">
+          <div className="flex flex-col gap-3 border-b border-border p-6 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-xl font-black text-slate-950">آخر الطلبات</h2>
-              <p className="mt-1 text-sm text-slate-600">مراجعة سريعة مع الربح المتوقع لكل طلب.</p>
+              <h2 className="text-xl font-black text-primary">آخر الطلبات</h2>
+              <p className="mt-1 text-sm text-muted">مراجعة سريعة مع الربح المتوقع لكل طلب.</p>
             </div>
-            <Link href="/admin/orders" className="w-fit bg-slate-950 px-4 py-2 text-sm font-black text-white hover:bg-teal-700">
+            <Link href="/admin/orders" className="btn-primary w-fit">
               إدارة الطلبات
             </Link>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[860px] text-right">
-              <thead className="bg-slate-50 text-sm font-black text-slate-600">
+              <thead className="bg-slate-50 text-sm font-black text-muted">
                 <tr>
                   <th className="p-4">رقم الطلب</th>
                   <th className="p-4">العميل</th>
@@ -63,7 +63,7 @@ export default function AdminPage() {
               <tbody className="divide-y divide-slate-100 text-sm font-bold text-slate-700">
                 {mockOrders.slice(0, 5).map((order) => (
                   <tr key={order.id}>
-                    <td className="p-4 font-black text-slate-950">{order.id}</td>
+                    <td className="p-4 font-black text-primary">{order.id}</td>
                     <td className="p-4">{order.customer}</td>
                     <td className="p-4">{order.date}</td>
                     <td className="p-4">{formatPrice(order.total)}</td>

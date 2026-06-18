@@ -19,7 +19,7 @@ export function PriceDisplay({
   if (isAdmin) {
     return (
       <div className={variant === "line" ? "grid gap-1" : "grid gap-3"}>
-        <div className="grid gap-2 text-sm">
+        <div className="grid gap-2 rounded-2xl bg-slate-50 p-3 text-sm">
           <AdminPriceRow label="التكلفة" value={formatPrice(product.costPrice)} highlight="danger" />
           <AdminPriceRow label="التجزئة" value={formatPrice(product.retailPrice)} />
           <AdminPriceRow label="التاجر" value={formatPrice(product.wholesalePrice)} />
@@ -28,7 +28,7 @@ export function PriceDisplay({
           <AdminPriceRow label="هامش الربح" value={`${formatPrice(margin.profit)} (${margin.percent}%)`} highlight="success" />
         </div>
         {product.discountPercent > 0 ? (
-          <span className="w-fit bg-amber-100 px-2 py-1 text-xs font-black text-amber-800">خصم {product.discountPercent}%</span>
+          <span className="badge-accent w-fit">خصم {product.discountPercent}%</span>
         ) : null}
       </div>
     );
@@ -36,11 +36,11 @@ export function PriceDisplay({
 
   return (
     <div className={variant === "details" ? "grid gap-2" : "grid gap-1"}>
-      <p className="text-xs font-bold text-slate-500">
+      <p className="text-xs font-bold text-muted">
         {price.label} - {roleLabels[role]}
       </p>
       <div className="flex items-end gap-2">
-        <p className={variant === "details" ? "text-3xl font-black text-slate-950" : "text-xl font-black text-slate-950"}>
+        <p className={variant === "details" ? "text-3xl font-black text-primary" : "text-xl font-black text-primary"}>
           {formatPrice(price.finalAmount)}
         </p>
         {price.discountPercent > 0 ? (
@@ -48,7 +48,7 @@ export function PriceDisplay({
         ) : null}
       </div>
       {price.discountPercent > 0 ? (
-        <span className="w-fit bg-amber-100 px-2 py-1 text-xs font-black text-amber-800">خصم {price.discountPercent}%</span>
+        <span className="badge-accent w-fit">خصم {price.discountPercent}%</span>
       ) : null}
     </div>
   );
@@ -63,11 +63,11 @@ function AdminPriceRow({
   value: string;
   highlight?: "danger" | "success";
 }) {
-  const color = highlight === "danger" ? "text-rose-700" : highlight === "success" ? "text-teal-700" : "text-slate-950";
+  const color = highlight === "danger" ? "text-rose-700" : highlight === "success" ? "text-teal-700" : "text-primary";
 
   return (
-    <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-1 last:border-b-0">
-      <span className="font-bold text-slate-500">{label}</span>
+    <div className="flex items-center justify-between gap-3 border-b border-slate-200/70 pb-1 last:border-b-0">
+      <span className="font-bold text-muted">{label}</span>
       <span className={`font-black ${color}`}>{value}</span>
     </div>
   );

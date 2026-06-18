@@ -19,11 +19,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const products = mockProducts.filter((product) => product.visible && product.categorySlug === category.slug);
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
-      <section className="border border-slate-200 bg-white p-6">
-        <p className="text-sm font-black text-teal-700">قسم</p>
-        <h1 className="mt-2 text-3xl font-black text-slate-950">{category.name}</h1>
-        <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600">{category.description}</p>
+    <div className="app-container flex flex-col gap-10 py-8">
+      <section className="surface-panel p-6 sm:p-8">
+        <p className="badge-primary w-fit">قسم</p>
+        <h1 className="mt-4 text-3xl font-black leading-tight text-primary sm:text-4xl">{category.name}</h1>
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">{category.description}</p>
       </section>
       <ProductGrid title={`منتجات ${category.name}`} products={products} role={role} />
     </div>

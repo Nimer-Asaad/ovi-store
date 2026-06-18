@@ -15,7 +15,7 @@ export function DemoRoleSwitcher({ currentRole }: { currentRole: DemoViewerRole 
       <select
         value={currentRole}
         onChange={(event) => updateRole(event.target.value)}
-        className="h-8 border border-white/10 bg-slate-900 px-2 text-xs font-black text-white outline-none focus:border-teal-300"
+        className="h-8 rounded-xl border border-white/10 bg-slate-900 px-2 text-xs font-black text-white outline-none focus:border-teal-300"
       >
         <option value="GUEST">{roleLabels.GUEST}</option>
         {userRoles.map((role: UserRole) => (

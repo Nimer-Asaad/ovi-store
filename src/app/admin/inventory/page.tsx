@@ -6,19 +6,19 @@ export default function AdminInventoryPage() {
   const lowStock = mockProducts.filter((product) => product.stock <= product.lowStockThreshold);
 
   return (
-    <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[260px_1fr] lg:px-8">
+    <div className="app-container grid gap-6 py-8 lg:grid-cols-[260px_1fr]">
       <AdminSidebar />
       <section className="grid gap-6">
-        <div className="border border-slate-200 bg-white p-6">
-          <p className="text-sm font-black text-teal-700">إدارة المخزون</p>
-          <h1 className="mt-2 text-3xl font-black text-slate-950">المخزون</h1>
-          <p className="mt-2 text-sm text-slate-600">{lowStock.length} منتجات تحت حد المخزون المنخفض.</p>
+        <div className="surface-panel p-6 sm:p-8">
+          <p className="badge-primary w-fit">إدارة المخزون</p>
+          <h1 className="mt-4 text-3xl font-black text-primary">المخزون</h1>
+          <p className="mt-2 text-sm text-muted">{lowStock.length} منتجات تحت حد المخزون المنخفض.</p>
         </div>
 
-        <div className="overflow-hidden border border-slate-200 bg-white">
+        <div className="surface-panel overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[920px] text-right">
-              <thead className="bg-slate-50 text-sm font-black text-slate-600">
+              <thead className="bg-slate-50 text-sm font-black text-muted">
                 <tr>
                   <th className="p-4">المنتج</th>
                   <th className="p-4">SKU</th>
@@ -36,7 +36,7 @@ export default function AdminInventoryPage() {
 
                   return (
                     <tr key={product.id}>
-                      <td className="p-4 font-black text-slate-950">{product.name}</td>
+                      <td className="p-4 font-black text-primary">{product.name}</td>
                       <td className="p-4">{product.sku}</td>
                       <td className="p-4">{supplier?.name ?? "غير محدد"}</td>
                       <td className={isLow ? "p-4 font-black text-rose-700" : "p-4"}>{product.stock}</td>

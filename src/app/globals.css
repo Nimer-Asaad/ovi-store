@@ -1,28 +1,181 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f8fb;
+  --background: #f8fafc;
   --foreground: #0f172a;
+  --surface: #ffffff;
+  --surface-soft: #f1f5f9;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --primary: #0f172a;
+  --secondary: #14b8a6;
+  --accent: #f59e0b;
+  --radius-sm: 0.625rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --shadow-soft: 0 10px 30px rgb(15 23 42 / 0.06);
+  --shadow-card: 0 16px 45px rgb(15 23 42 / 0.08);
+  --shadow-lift: 0 24px 70px rgb(15 23 42 / 0.12);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Tahoma", "Arial", sans-serif;
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-cairo), "Cairo", "Tahoma", sans-serif;
   --font-mono: "Consolas", monospace;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  --radius-card: var(--radius-lg);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  background: var(--background);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgb(248 250 252 / 0.96), #f8fafc 280px),
+    radial-gradient(circle at top right, rgb(20 184 166 / 0.09), transparent 34rem);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
 ::selection {
-  background: #14b8a6;
+  background: var(--secondary);
   color: white;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  border-radius: var(--radius-md);
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th {
+  letter-spacing: 0;
+}
+
+@layer components {
+  .app-container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .surface-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .surface-panel {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
+  }
+
+  .btn-primary {
+    @apply inline-flex h-11 items-center justify-center gap-2 px-5 text-sm font-black text-white transition;
+    border-radius: var(--radius-md);
+    background: var(--primary);
+    box-shadow: 0 10px 25px rgb(15 23 42 / 0.14);
+  }
+
+  .btn-primary:hover {
+    background: #1e293b;
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    @apply inline-flex h-11 items-center justify-center gap-2 px-5 text-sm font-black text-white transition;
+    border-radius: var(--radius-md);
+    background: var(--secondary);
+    box-shadow: 0 10px 25px rgb(20 184 166 / 0.18);
+  }
+
+  .btn-secondary:hover {
+    background: #0f9f92;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    @apply inline-flex h-11 items-center justify-center gap-2 border px-5 text-sm font-black transition;
+    border-color: var(--border);
+    border-radius: var(--radius-md);
+    color: var(--primary);
+    background: rgb(255 255 255 / 0.72);
+  }
+
+  .btn-ghost:hover {
+    border-color: rgb(20 184 166 / 0.35);
+    color: #0f766e;
+    background: #f0fdfa;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 text-xs font-black;
+    border-radius: 999px;
+  }
+
+  .badge-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #0f766e;
+    background: #ccfbf1;
+  }
+
+  .badge-accent {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #92400e;
+    background: #fef3c7;
+  }
+
+  .form-control {
+    @apply border bg-white px-4 text-sm font-bold outline-none transition;
+    border-color: var(--border);
+    border-radius: var(--radius-md);
+    color: var(--primary);
+  }
+
+  .form-control:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 4px rgb(20 184 166 / 0.12);
+  }
 }

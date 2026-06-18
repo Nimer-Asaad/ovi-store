@@ -27,15 +27,23 @@ export type AggregateProduct = {
 }
 
 export type ProductAvgAggregateOutputType = {
-  price: number | null
-  wholesale: number | null
+  costPrice: number | null
+  retailPrice: number | null
+  wholesalePrice: number | null
+  dealerPrice: number | null
+  discountPercent: number | null
   stock: number | null
+  lowStockThreshold: number | null
 }
 
 export type ProductSumAggregateOutputType = {
-  price: number | null
-  wholesale: number | null
+  costPrice: number | null
+  retailPrice: number | null
+  wholesalePrice: number | null
+  dealerPrice: number | null
+  discountPercent: number | null
   stock: number | null
+  lowStockThreshold: number | null
 }
 
 export type ProductMinAggregateOutputType = {
@@ -44,9 +52,14 @@ export type ProductMinAggregateOutputType = {
   slug: string | null
   sku: string | null
   description: string | null
-  price: number | null
-  wholesale: number | null
+  costPrice: number | null
+  retailPrice: number | null
+  wholesalePrice: number | null
+  dealerPrice: number | null
+  discountPercent: number | null
   stock: number | null
+  lowStockThreshold: number | null
+  visible: boolean | null
   featured: boolean | null
   categoryId: string | null
   createdAt: Date | null
@@ -59,9 +72,14 @@ export type ProductMaxAggregateOutputType = {
   slug: string | null
   sku: string | null
   description: string | null
-  price: number | null
-  wholesale: number | null
+  costPrice: number | null
+  retailPrice: number | null
+  wholesalePrice: number | null
+  dealerPrice: number | null
+  discountPercent: number | null
   stock: number | null
+  lowStockThreshold: number | null
+  visible: boolean | null
   featured: boolean | null
   categoryId: string | null
   createdAt: Date | null
@@ -74,9 +92,14 @@ export type ProductCountAggregateOutputType = {
   slug: number
   sku: number
   description: number
-  price: number
-  wholesale: number
+  costPrice: number
+  retailPrice: number
+  wholesalePrice: number
+  dealerPrice: number
+  discountPercent: number
   stock: number
+  lowStockThreshold: number
+  visible: number
   featured: number
   categoryId: number
   createdAt: number
@@ -86,15 +109,23 @@ export type ProductCountAggregateOutputType = {
 
 
 export type ProductAvgAggregateInputType = {
-  price?: true
-  wholesale?: true
+  costPrice?: true
+  retailPrice?: true
+  wholesalePrice?: true
+  dealerPrice?: true
+  discountPercent?: true
   stock?: true
+  lowStockThreshold?: true
 }
 
 export type ProductSumAggregateInputType = {
-  price?: true
-  wholesale?: true
+  costPrice?: true
+  retailPrice?: true
+  wholesalePrice?: true
+  dealerPrice?: true
+  discountPercent?: true
   stock?: true
+  lowStockThreshold?: true
 }
 
 export type ProductMinAggregateInputType = {
@@ -103,9 +134,14 @@ export type ProductMinAggregateInputType = {
   slug?: true
   sku?: true
   description?: true
-  price?: true
-  wholesale?: true
+  costPrice?: true
+  retailPrice?: true
+  wholesalePrice?: true
+  dealerPrice?: true
+  discountPercent?: true
   stock?: true
+  lowStockThreshold?: true
+  visible?: true
   featured?: true
   categoryId?: true
   createdAt?: true
@@ -118,9 +154,14 @@ export type ProductMaxAggregateInputType = {
   slug?: true
   sku?: true
   description?: true
-  price?: true
-  wholesale?: true
+  costPrice?: true
+  retailPrice?: true
+  wholesalePrice?: true
+  dealerPrice?: true
+  discountPercent?: true
   stock?: true
+  lowStockThreshold?: true
+  visible?: true
   featured?: true
   categoryId?: true
   createdAt?: true
@@ -133,9 +174,14 @@ export type ProductCountAggregateInputType = {
   slug?: true
   sku?: true
   description?: true
-  price?: true
-  wholesale?: true
+  costPrice?: true
+  retailPrice?: true
+  wholesalePrice?: true
+  dealerPrice?: true
+  discountPercent?: true
   stock?: true
+  lowStockThreshold?: true
+  visible?: true
   featured?: true
   categoryId?: true
   createdAt?: true
@@ -235,9 +281,14 @@ export type ProductGroupByOutputType = {
   slug: string
   sku: string
   description: string
-  price: number
-  wholesale: number
+  costPrice: number
+  retailPrice: number
+  wholesalePrice: number
+  dealerPrice: number | null
+  discountPercent: number
   stock: number
+  lowStockThreshold: number
+  visible: boolean
   featured: boolean
   categoryId: string
   createdAt: Date
@@ -273,9 +324,14 @@ export type ProductWhereInput = {
   slug?: Prisma.StringFilter<"Product"> | string
   sku?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringFilter<"Product"> | string
-  price?: Prisma.IntFilter<"Product"> | number
-  wholesale?: Prisma.IntFilter<"Product"> | number
+  costPrice?: Prisma.IntFilter<"Product"> | number
+  retailPrice?: Prisma.IntFilter<"Product"> | number
+  wholesalePrice?: Prisma.IntFilter<"Product"> | number
+  dealerPrice?: Prisma.IntNullableFilter<"Product"> | number | null
+  discountPercent?: Prisma.IntFilter<"Product"> | number
   stock?: Prisma.IntFilter<"Product"> | number
+  lowStockThreshold?: Prisma.IntFilter<"Product"> | number
+  visible?: Prisma.BoolFilter<"Product"> | boolean
   featured?: Prisma.BoolFilter<"Product"> | boolean
   categoryId?: Prisma.StringFilter<"Product"> | string
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -290,9 +346,14 @@ export type ProductOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  price?: Prisma.SortOrder
-  wholesale?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
+  retailPrice?: Prisma.SortOrder
+  wholesalePrice?: Prisma.SortOrder
+  dealerPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  discountPercent?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  lowStockThreshold?: Prisma.SortOrder
+  visible?: Prisma.SortOrder
   featured?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -310,9 +371,14 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   name?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringFilter<"Product"> | string
-  price?: Prisma.IntFilter<"Product"> | number
-  wholesale?: Prisma.IntFilter<"Product"> | number
+  costPrice?: Prisma.IntFilter<"Product"> | number
+  retailPrice?: Prisma.IntFilter<"Product"> | number
+  wholesalePrice?: Prisma.IntFilter<"Product"> | number
+  dealerPrice?: Prisma.IntNullableFilter<"Product"> | number | null
+  discountPercent?: Prisma.IntFilter<"Product"> | number
   stock?: Prisma.IntFilter<"Product"> | number
+  lowStockThreshold?: Prisma.IntFilter<"Product"> | number
+  visible?: Prisma.BoolFilter<"Product"> | boolean
   featured?: Prisma.BoolFilter<"Product"> | boolean
   categoryId?: Prisma.StringFilter<"Product"> | string
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -327,9 +393,14 @@ export type ProductOrderByWithAggregationInput = {
   slug?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  price?: Prisma.SortOrder
-  wholesale?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
+  retailPrice?: Prisma.SortOrder
+  wholesalePrice?: Prisma.SortOrder
+  dealerPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  discountPercent?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  lowStockThreshold?: Prisma.SortOrder
+  visible?: Prisma.SortOrder
   featured?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -350,9 +421,14 @@ export type ProductScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"Product"> | string
   sku?: Prisma.StringWithAggregatesFilter<"Product"> | string
   description?: Prisma.StringWithAggregatesFilter<"Product"> | string
-  price?: Prisma.IntWithAggregatesFilter<"Product"> | number
-  wholesale?: Prisma.IntWithAggregatesFilter<"Product"> | number
+  costPrice?: Prisma.IntWithAggregatesFilter<"Product"> | number
+  retailPrice?: Prisma.IntWithAggregatesFilter<"Product"> | number
+  wholesalePrice?: Prisma.IntWithAggregatesFilter<"Product"> | number
+  dealerPrice?: Prisma.IntNullableWithAggregatesFilter<"Product"> | number | null
+  discountPercent?: Prisma.IntWithAggregatesFilter<"Product"> | number
   stock?: Prisma.IntWithAggregatesFilter<"Product"> | number
+  lowStockThreshold?: Prisma.IntWithAggregatesFilter<"Product"> | number
+  visible?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
   featured?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
   categoryId?: Prisma.StringWithAggregatesFilter<"Product"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
@@ -365,9 +441,14 @@ export type ProductCreateInput = {
   slug: string
   sku: string
   description: string
-  price: number
-  wholesale: number
+  costPrice: number
+  retailPrice: number
+  wholesalePrice: number
+  dealerPrice?: number | null
+  discountPercent?: number
   stock?: number
+  lowStockThreshold?: number
+  visible?: boolean
   featured?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -381,9 +462,14 @@ export type ProductUncheckedCreateInput = {
   slug: string
   sku: string
   description: string
-  price: number
-  wholesale: number
+  costPrice: number
+  retailPrice: number
+  wholesalePrice: number
+  dealerPrice?: number | null
+  discountPercent?: number
   stock?: number
+  lowStockThreshold?: number
+  visible?: boolean
   featured?: boolean
   categoryId: string
   createdAt?: Date | string
@@ -397,9 +483,14 @@ export type ProductUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  wholesale?: Prisma.IntFieldUpdateOperationsInput | number
+  costPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  retailPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesalePrice?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerPrice?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discountPercent?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  visible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -413,9 +504,14 @@ export type ProductUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  wholesale?: Prisma.IntFieldUpdateOperationsInput | number
+  costPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  retailPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesalePrice?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerPrice?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discountPercent?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  visible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -429,9 +525,14 @@ export type ProductCreateManyInput = {
   slug: string
   sku: string
   description: string
-  price: number
-  wholesale: number
+  costPrice: number
+  retailPrice: number
+  wholesalePrice: number
+  dealerPrice?: number | null
+  discountPercent?: number
   stock?: number
+  lowStockThreshold?: number
+  visible?: boolean
   featured?: boolean
   categoryId: string
   createdAt?: Date | string
@@ -444,9 +545,14 @@ export type ProductUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  wholesale?: Prisma.IntFieldUpdateOperationsInput | number
+  costPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  retailPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesalePrice?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerPrice?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discountPercent?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  visible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -458,9 +564,14 @@ export type ProductUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  wholesale?: Prisma.IntFieldUpdateOperationsInput | number
+  costPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  retailPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesalePrice?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerPrice?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discountPercent?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  visible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -483,9 +594,14 @@ export type ProductCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  price?: Prisma.SortOrder
-  wholesale?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
+  retailPrice?: Prisma.SortOrder
+  wholesalePrice?: Prisma.SortOrder
+  dealerPrice?: Prisma.SortOrder
+  discountPercent?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  lowStockThreshold?: Prisma.SortOrder
+  visible?: Prisma.SortOrder
   featured?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -493,9 +609,13 @@ export type ProductCountOrderByAggregateInput = {
 }
 
 export type ProductAvgOrderByAggregateInput = {
-  price?: Prisma.SortOrder
-  wholesale?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
+  retailPrice?: Prisma.SortOrder
+  wholesalePrice?: Prisma.SortOrder
+  dealerPrice?: Prisma.SortOrder
+  discountPercent?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  lowStockThreshold?: Prisma.SortOrder
 }
 
 export type ProductMaxOrderByAggregateInput = {
@@ -504,9 +624,14 @@ export type ProductMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  price?: Prisma.SortOrder
-  wholesale?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
+  retailPrice?: Prisma.SortOrder
+  wholesalePrice?: Prisma.SortOrder
+  dealerPrice?: Prisma.SortOrder
+  discountPercent?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  lowStockThreshold?: Prisma.SortOrder
+  visible?: Prisma.SortOrder
   featured?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -519,9 +644,14 @@ export type ProductMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  price?: Prisma.SortOrder
-  wholesale?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
+  retailPrice?: Prisma.SortOrder
+  wholesalePrice?: Prisma.SortOrder
+  dealerPrice?: Prisma.SortOrder
+  discountPercent?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  lowStockThreshold?: Prisma.SortOrder
+  visible?: Prisma.SortOrder
   featured?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -529,9 +659,13 @@ export type ProductMinOrderByAggregateInput = {
 }
 
 export type ProductSumOrderByAggregateInput = {
-  price?: Prisma.SortOrder
-  wholesale?: Prisma.SortOrder
+  costPrice?: Prisma.SortOrder
+  retailPrice?: Prisma.SortOrder
+  wholesalePrice?: Prisma.SortOrder
+  dealerPrice?: Prisma.SortOrder
+  discountPercent?: Prisma.SortOrder
   stock?: Prisma.SortOrder
+  lowStockThreshold?: Prisma.SortOrder
 }
 
 export type ProductScalarRelationFilter = {
@@ -589,6 +723,14 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
@@ -613,9 +755,14 @@ export type ProductCreateWithoutCategoryInput = {
   slug: string
   sku: string
   description: string
-  price: number
-  wholesale: number
+  costPrice: number
+  retailPrice: number
+  wholesalePrice: number
+  dealerPrice?: number | null
+  discountPercent?: number
   stock?: number
+  lowStockThreshold?: number
+  visible?: boolean
   featured?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -628,9 +775,14 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   slug: string
   sku: string
   description: string
-  price: number
-  wholesale: number
+  costPrice: number
+  retailPrice: number
+  wholesalePrice: number
+  dealerPrice?: number | null
+  discountPercent?: number
   stock?: number
+  lowStockThreshold?: number
+  visible?: boolean
   featured?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -671,9 +823,14 @@ export type ProductScalarWhereInput = {
   slug?: Prisma.StringFilter<"Product"> | string
   sku?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringFilter<"Product"> | string
-  price?: Prisma.IntFilter<"Product"> | number
-  wholesale?: Prisma.IntFilter<"Product"> | number
+  costPrice?: Prisma.IntFilter<"Product"> | number
+  retailPrice?: Prisma.IntFilter<"Product"> | number
+  wholesalePrice?: Prisma.IntFilter<"Product"> | number
+  dealerPrice?: Prisma.IntNullableFilter<"Product"> | number | null
+  discountPercent?: Prisma.IntFilter<"Product"> | number
   stock?: Prisma.IntFilter<"Product"> | number
+  lowStockThreshold?: Prisma.IntFilter<"Product"> | number
+  visible?: Prisma.BoolFilter<"Product"> | boolean
   featured?: Prisma.BoolFilter<"Product"> | boolean
   categoryId?: Prisma.StringFilter<"Product"> | string
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -686,9 +843,14 @@ export type ProductCreateWithoutOrderItemsInput = {
   slug: string
   sku: string
   description: string
-  price: number
-  wholesale: number
+  costPrice: number
+  retailPrice: number
+  wholesalePrice: number
+  dealerPrice?: number | null
+  discountPercent?: number
   stock?: number
+  lowStockThreshold?: number
+  visible?: boolean
   featured?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -701,9 +863,14 @@ export type ProductUncheckedCreateWithoutOrderItemsInput = {
   slug: string
   sku: string
   description: string
-  price: number
-  wholesale: number
+  costPrice: number
+  retailPrice: number
+  wholesalePrice: number
+  dealerPrice?: number | null
+  discountPercent?: number
   stock?: number
+  lowStockThreshold?: number
+  visible?: boolean
   featured?: boolean
   categoryId: string
   createdAt?: Date | string
@@ -732,9 +899,14 @@ export type ProductUpdateWithoutOrderItemsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  wholesale?: Prisma.IntFieldUpdateOperationsInput | number
+  costPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  retailPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesalePrice?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerPrice?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discountPercent?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  visible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -747,9 +919,14 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  wholesale?: Prisma.IntFieldUpdateOperationsInput | number
+  costPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  retailPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesalePrice?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerPrice?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discountPercent?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  visible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -762,9 +939,14 @@ export type ProductCreateManyCategoryInput = {
   slug: string
   sku: string
   description: string
-  price: number
-  wholesale: number
+  costPrice: number
+  retailPrice: number
+  wholesalePrice: number
+  dealerPrice?: number | null
+  discountPercent?: number
   stock?: number
+  lowStockThreshold?: number
+  visible?: boolean
   featured?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -776,9 +958,14 @@ export type ProductUpdateWithoutCategoryInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  wholesale?: Prisma.IntFieldUpdateOperationsInput | number
+  costPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  retailPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesalePrice?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerPrice?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discountPercent?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  visible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -791,9 +978,14 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  wholesale?: Prisma.IntFieldUpdateOperationsInput | number
+  costPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  retailPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesalePrice?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerPrice?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discountPercent?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  visible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -806,9 +998,14 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  wholesale?: Prisma.IntFieldUpdateOperationsInput | number
+  costPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  retailPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesalePrice?: Prisma.IntFieldUpdateOperationsInput | number
+  dealerPrice?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discountPercent?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  visible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -851,9 +1048,14 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   slug?: boolean
   sku?: boolean
   description?: boolean
-  price?: boolean
-  wholesale?: boolean
+  costPrice?: boolean
+  retailPrice?: boolean
+  wholesalePrice?: boolean
+  dealerPrice?: boolean
+  discountPercent?: boolean
   stock?: boolean
+  lowStockThreshold?: boolean
+  visible?: boolean
   featured?: boolean
   categoryId?: boolean
   createdAt?: boolean
@@ -869,9 +1071,14 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   slug?: boolean
   sku?: boolean
   description?: boolean
-  price?: boolean
-  wholesale?: boolean
+  costPrice?: boolean
+  retailPrice?: boolean
+  wholesalePrice?: boolean
+  dealerPrice?: boolean
+  discountPercent?: boolean
   stock?: boolean
+  lowStockThreshold?: boolean
+  visible?: boolean
   featured?: boolean
   categoryId?: boolean
   createdAt?: boolean
@@ -885,9 +1092,14 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   slug?: boolean
   sku?: boolean
   description?: boolean
-  price?: boolean
-  wholesale?: boolean
+  costPrice?: boolean
+  retailPrice?: boolean
+  wholesalePrice?: boolean
+  dealerPrice?: boolean
+  discountPercent?: boolean
   stock?: boolean
+  lowStockThreshold?: boolean
+  visible?: boolean
   featured?: boolean
   categoryId?: boolean
   createdAt?: boolean
@@ -901,16 +1113,21 @@ export type ProductSelectScalar = {
   slug?: boolean
   sku?: boolean
   description?: boolean
-  price?: boolean
-  wholesale?: boolean
+  costPrice?: boolean
+  retailPrice?: boolean
+  wholesalePrice?: boolean
+  dealerPrice?: boolean
+  discountPercent?: boolean
   stock?: boolean
+  lowStockThreshold?: boolean
+  visible?: boolean
   featured?: boolean
   categoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "sku" | "description" | "price" | "wholesale" | "stock" | "featured" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "sku" | "description" | "costPrice" | "retailPrice" | "wholesalePrice" | "dealerPrice" | "discountPercent" | "stock" | "lowStockThreshold" | "visible" | "featured" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
@@ -935,9 +1152,14 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     slug: string
     sku: string
     description: string
-    price: number
-    wholesale: number
+    costPrice: number
+    retailPrice: number
+    wholesalePrice: number
+    dealerPrice: number | null
+    discountPercent: number
     stock: number
+    lowStockThreshold: number
+    visible: boolean
     featured: boolean
     categoryId: string
     createdAt: Date
@@ -1372,9 +1594,14 @@ export interface ProductFieldRefs {
   readonly slug: Prisma.FieldRef<"Product", 'String'>
   readonly sku: Prisma.FieldRef<"Product", 'String'>
   readonly description: Prisma.FieldRef<"Product", 'String'>
-  readonly price: Prisma.FieldRef<"Product", 'Int'>
-  readonly wholesale: Prisma.FieldRef<"Product", 'Int'>
+  readonly costPrice: Prisma.FieldRef<"Product", 'Int'>
+  readonly retailPrice: Prisma.FieldRef<"Product", 'Int'>
+  readonly wholesalePrice: Prisma.FieldRef<"Product", 'Int'>
+  readonly dealerPrice: Prisma.FieldRef<"Product", 'Int'>
+  readonly discountPercent: Prisma.FieldRef<"Product", 'Int'>
   readonly stock: Prisma.FieldRef<"Product", 'Int'>
+  readonly lowStockThreshold: Prisma.FieldRef<"Product", 'Int'>
+  readonly visible: Prisma.FieldRef<"Product", 'Boolean'>
   readonly featured: Prisma.FieldRef<"Product", 'Boolean'>
   readonly categoryId: Prisma.FieldRef<"Product", 'String'>
   readonly createdAt: Prisma.FieldRef<"Product", 'DateTime'>
