@@ -11,11 +11,17 @@ export default async function EditProductPage({
   searchParams: Promise<{ error?: string }>;
 }) {
   const { id } = await params;
-  const [product, options, query] = await Promise.all([getAdminProductById(id), getCatalogFormOptions(), searchParams]);
+  const [product, query] = await Promise.all([getAdminProductById(id), searchParams]);
 
   if (!product) {
     notFound();
   }
+
+  const options = await getCatalogFormOptions({
+    categoryId: product.categoryId,
+    brandId: product.brandId,
+    supplierId: product.supplierId,
+  });
 
   return (
     <div className="app-container grid gap-6 py-8 lg:grid-cols-[260px_1fr]">

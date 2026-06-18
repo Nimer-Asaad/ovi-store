@@ -85,11 +85,26 @@ export async function getAdminProductById(id: string) {
   });
 }
 
-export async function getCatalogFormOptions() {
+export async function getCatalogFormOptions(selected?: { categoryId?: string; brandId?: string; supplierId?: string }) {
   const [categories, brands, suppliers] = await Promise.all([
-    prisma.category.findMany({ orderBy: { nameAr: "asc" } }),
-    prisma.brand.findMany({ orderBy: { name: "asc" } }),
-    prisma.supplier.findMany({ orderBy: { name: "asc" } }),
+    prisma.category.findMany({
+      where: {
+        OR: [{ isVisible: true }, ...(selected?.categoryId ? [{ id: selected.categoryId }] : [])],
+      },
+      orderBy: { nameAr: "asc" },
+    }),
+    prisma.brand.findMany({
+      where: {
+        OR: [{ isVisible: true }, ...(selected?.brandId ? [{ id: selected.brandId }] : [])],
+      },
+      orderBy: { name: "asc" },
+    }),
+    prisma.supplier.findMany({
+      where: {
+        OR: [{ isActive: true }, ...(selected?.supplierId ? [{ id: selected.supplierId }] : [])],
+      },
+      orderBy: { name: "asc" },
+    }),
   ]);
 
   return { categories, brands, suppliers };

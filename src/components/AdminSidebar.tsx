@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { Boxes, LayoutDashboard, Package, ReceiptText, Truck, UserCog, UsersRound, Warehouse } from "lucide-react";
+import { Boxes, FolderTree, LayoutDashboard, Package, ReceiptText, Tags, Truck, UserCog, UsersRound, Warehouse } from "lucide-react";
 
 const links = [
   { href: "/admin", label: "نظرة عامة", icon: LayoutDashboard },
   { href: "/admin/products", label: "المنتجات", icon: Package },
+  { href: "/admin/categories", label: "الأقسام", icon: FolderTree },
+  { href: "/admin/brands", label: "العلامات", icon: Tags },
   { href: "/admin/orders", label: "الطلبات", icon: ReceiptText },
   { href: "/admin/customers", label: "العملاء", icon: UsersRound },
   { href: "/admin/suppliers", label: "الموردون", icon: Truck },
