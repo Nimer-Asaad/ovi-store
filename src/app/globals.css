@@ -114,6 +114,14 @@ th {
     transform: translateY(-1px);
   }
 
+  .btn-primary:focus-visible,
+  .btn-secondary:focus-visible,
+  .btn-ghost:focus-visible,
+  .form-control:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgb(20 184 166 / 0.16), 0 10px 25px rgb(15 23 42 / 0.10);
+  }
+
   .btn-secondary {
     @apply inline-flex h-11 items-center justify-center gap-2 px-5 text-sm font-black text-white transition;
     border-radius: var(--radius-md);
@@ -138,6 +146,20 @@ th {
     border-color: rgb(20 184 166 / 0.35);
     color: #0f766e;
     background: #f0fdfa;
+  }
+
+  .btn-soft {
+    @apply inline-flex h-11 items-center justify-center gap-2 px-5 text-sm font-black transition;
+    border: 1px solid rgb(226 232 240 / 0.9);
+    border-radius: var(--radius-md);
+    color: #0f766e;
+    background: #f0fdfa;
+  }
+
+  .btn-soft:hover {
+    border-color: rgb(20 184 166 / 0.45);
+    background: #ccfbf1;
+    transform: translateY(-1px);
   }
 
   .badge {
@@ -177,5 +199,9 @@ th {
   .form-control:focus {
     border-color: var(--secondary);
     box-shadow: 0 0 0 4px rgb(20 184 166 / 0.12);
+  }
+
+  .form-control::placeholder {
+    color: #94a3b8;
   }
 }
