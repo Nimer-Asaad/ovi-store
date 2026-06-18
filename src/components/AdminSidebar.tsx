@@ -18,7 +18,7 @@ export function AdminSidebar() {
       <h2 className="px-2 text-lg font-black text-primary">لوحة الإدارة</h2>
       <nav className="mt-4 grid gap-2">
         {links.map((link) => (
-          <Link key={link.href} href={link.href} className="flex items-center gap-3 rounded-2xl bg-slate-50 px-3 py-3 text-sm font-black text-slate-700 transition hover:bg-teal-50 hover:text-teal-800">
+          <Link key={link.href} href={link.href} className="flex items-center gap-3 rounded-2xl bg-slate-50 px-3 py-3 text-sm font-black text-slate-700 transition hover:bg-[#fbf7ef] hover:text-[#73572f]">
             <link.icon className="h-5 w-5" aria-hidden="true" />
             {link.label}
           </Link>

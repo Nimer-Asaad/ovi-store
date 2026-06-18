@@ -37,8 +37,8 @@ export function AdminProductForm({ product }: { product?: Product }) {
         <AdminField label="سعر الموزع" type="number" defaultValue={product?.dealerPrice} />
         <AdminField label="نسبة الخصم" type="number" defaultValue={product?.discountPercent ?? 0} />
         {margin ? (
-          <div className="rounded-2xl bg-teal-50 p-4 md:col-span-5">
-            <p className="text-sm font-black text-teal-800">هامش الربح الحالي: {formatPrice(margin.profit)} ({margin.percent}%)</p>
+          <div className="rounded-2xl bg-[#fbf7ef] p-4 md:col-span-5">
+            <p className="text-sm font-black text-[#73572f]">هامش الربح الحالي: {formatPrice(margin.profit)} ({margin.percent}%)</p>
           </div>
         ) : null}
       </section>
@@ -58,11 +58,11 @@ export function AdminProductForm({ product }: { product?: Product }) {
           </select>
         </label>
         <label className="flex items-center gap-3 rounded-2xl bg-slate-50 p-4 text-sm font-black text-slate-700">
-          <input type="checkbox" defaultChecked={product?.visible ?? true} className="h-5 w-5 accent-teal-600" />
+          <input type="checkbox" defaultChecked={product?.visible ?? true} className="h-5 w-5 accent-[#A8844F]" />
           المنتج ظاهر في المتجر
         </label>
         <label className="flex items-center gap-3 rounded-2xl bg-slate-50 p-4 text-sm font-black text-slate-700">
-          <input type="checkbox" defaultChecked={product?.featured ?? false} className="h-5 w-5 accent-teal-600" />
+          <input type="checkbox" defaultChecked={product?.featured ?? false} className="h-5 w-5 accent-[#A8844F]" />
           منتج مميز
         </label>
       </section>

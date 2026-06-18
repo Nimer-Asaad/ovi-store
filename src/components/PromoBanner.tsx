@@ -6,7 +6,7 @@ export function PromoBanner() {
       <div className="surface-card p-6 md:col-span-2">
         <p className="badge-primary w-fit">عرض الافتتاح</p>
         <h2 className="mt-4 text-2xl font-black leading-9 text-primary">خصم خاص على شواحن GaN وكيابل Type-C للطلبات الكبيرة</h2>
-        <Link href="/categories/chargers" className="mt-4 inline-flex text-sm font-black text-teal-700 hover:text-teal-600">
+        <Link href="/categories/chargers" className="mt-4 inline-flex text-sm font-black text-dark-gold hover:text-primary">
           مشاهدة الشواحن
         </Link>
       </div>

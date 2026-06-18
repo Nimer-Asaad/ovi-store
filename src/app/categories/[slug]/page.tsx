@@ -51,7 +51,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                   <Link
                     key={item.slug}
                     href={`/categories/${item.slug}`}
-                    className="flex items-center justify-between rounded-2xl bg-white px-4 py-3 text-sm font-black text-primary transition hover:text-teal-700"
+                    className="flex items-center justify-between rounded-2xl bg-white px-4 py-3 text-sm font-black text-primary transition hover:text-dark-gold"
                   >
                     {item.name}
                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />

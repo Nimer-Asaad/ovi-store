@@ -40,7 +40,7 @@ export default async function CartPage() {
 
               return (
                 <article key={product.slug} className="grid gap-4 rounded-[1.25rem] border border-border bg-white p-4 shadow-soft sm:grid-cols-[7rem_1fr_auto] sm:items-center">
-                  <Link href={`/products/${product.slug}`} className={`grid aspect-square place-items-center rounded-2xl bg-gradient-to-br ${product.color} p-4 text-xl font-black text-white`}>
+                  <Link href={`/products/${product.slug}`} className="grid aspect-square place-items-center rounded-2xl bg-[linear-gradient(135deg,#0F172A,#1E293B_52%,#A8844F)] p-4 text-xl font-black text-[#f7ead2]">
                     {product.categoryName.slice(0, 2)}
                   </Link>
                   <div>
@@ -48,7 +48,7 @@ export default async function CartPage() {
                       <span className="badge bg-slate-100 text-slate-700">{product.categoryName}</span>
                       <span className="badge border border-border bg-white text-muted">{product.sku}</span>
                     </div>
-                    <Link href={`/products/${product.slug}`} className="mt-3 block text-lg font-black leading-7 text-primary hover:text-teal-700">
+                    <Link href={`/products/${product.slug}`} className="mt-3 block text-lg font-black leading-7 text-primary hover:text-dark-gold">
                       {product.name}
                     </Link>
                     <div className="mt-3">

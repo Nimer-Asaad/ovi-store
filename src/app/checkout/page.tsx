@@ -91,7 +91,7 @@ export default async function CheckoutPage() {
           <div className="mt-5 grid gap-3 border-t border-border pt-5">
             {checkoutItems.map((product) => (
               <div key={product.slug} className="grid grid-cols-[3.5rem_1fr_auto] items-center gap-3">
-                <div className={`grid aspect-square place-items-center rounded-2xl bg-gradient-to-br ${product.color} text-sm font-black text-white`}>
+                <div className="grid aspect-square place-items-center rounded-2xl bg-[linear-gradient(135deg,#0F172A,#1E293B_52%,#A8844F)] text-sm font-black text-[#f7ead2]">
                   {product.categoryName.slice(0, 2)}
                 </div>
                 <div className="min-w-0">

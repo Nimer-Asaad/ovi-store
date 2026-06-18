@@ -2,7 +2,7 @@ import type { OrderStatus } from "@/data/mock";
 
 const statusMap: Record<OrderStatus, { label: string; className: string }> = {
   pending: { label: "قيد الانتظار", className: "bg-amber-100 text-amber-800" },
-  under_review: { label: "قيد المراجعة", className: "bg-cyan-100 text-cyan-800" },
+  under_review: { label: "قيد المراجعة", className: "bg-[#f4eadb] text-[#73572f]" },
   confirmed: { label: "مؤكد", className: "bg-blue-100 text-blue-800" },
   preparing: { label: "قيد التجهيز", className: "bg-indigo-100 text-indigo-800" },
   delivered: { label: "تم التسليم", className: "bg-emerald-100 text-emerald-800" },

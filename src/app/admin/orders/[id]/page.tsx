@@ -66,7 +66,7 @@ export default async function AdminOrderDetailsPage({ params }: { params: Promis
                     <td className="p-4">{item.quantity}</td>
                     <td className="p-4">{formatPrice(item.unitPrice)}</td>
                     <td className="p-4 text-rose-700">{formatPrice(item.costPrice)}</td>
-                    <td className="p-4 text-teal-700">{formatPrice((item.unitPrice - item.costPrice) * item.quantity)}</td>
+                    <td className="p-4 text-dark-gold">{formatPrice((item.unitPrice - item.costPrice) * item.quantity)}</td>
                   </tr>
                 ))}
               </tbody>

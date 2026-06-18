@@ -46,10 +46,10 @@ export default function AdminProductsPage() {
                     <td className="p-4">{product.categoryName}</td>
                     <td className="p-4 text-rose-700">{formatPrice(product.costPrice)}</td>
                     <td className="p-4">{formatPrice(product.retailPrice)}</td>
-                    <td className="p-4 text-teal-700">{formatPrice(product.wholesalePrice)}</td>
+                    <td className="p-4 text-dark-gold">{formatPrice(product.wholesalePrice)}</td>
                     <td className="p-4">{product.dealerPrice ? formatPrice(product.dealerPrice) : "غير محدد"}</td>
                     <td className="p-4">{product.discountPercent}%</td>
-                    <td className="p-4 text-teal-700">{getProfitMargin(product).percent}%</td>
+                    <td className="p-4 text-dark-gold">{getProfitMargin(product).percent}%</td>
                     <td className={product.stock <= product.lowStockThreshold ? "p-4 font-black text-rose-700" : "p-4"}>{product.stock}</td>
                     <td className="p-4">
                       <span className={product.visible ? "bg-emerald-100 px-3 py-1 text-xs font-black text-emerald-800" : "bg-slate-200 px-3 py-1 text-xs font-black text-slate-700"}>
@@ -58,10 +58,10 @@ export default function AdminProductsPage() {
                     </td>
                     <td className="p-4">
                       <div className="flex flex-wrap gap-2">
-                        <Link href={`/admin/products/${product.id}/edit`} className="rounded-lg bg-primary px-3 py-2 text-xs font-black text-white hover:bg-teal-700">
+                        <Link href={`/admin/products/${product.id}/edit`} className="rounded-lg bg-primary px-3 py-2 text-xs font-black text-white hover:bg-soft-navy">
                           تعديل
                         </Link>
-                        <button type="button" className="rounded-lg border border-border px-3 py-2 text-xs font-black text-slate-700 hover:border-teal-300 hover:text-teal-700">
+                        <button type="button" className="rounded-lg border border-border px-3 py-2 text-xs font-black text-slate-700 hover:border-secondary hover:text-dark-gold">
                           {product.visible ? "إخفاء" : "إظهار"}
                         </button>
                         <button type="button" className="rounded-lg border border-rose-200 px-3 py-2 text-xs font-black text-rose-700 hover:bg-rose-50">

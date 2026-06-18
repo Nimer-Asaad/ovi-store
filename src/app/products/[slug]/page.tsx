@@ -27,13 +27,13 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
     <main className="app-container flex flex-col gap-10 py-8 sm:py-10">
       <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="surface-panel overflow-hidden p-3">
-          <div className={`relative flex min-h-[28rem] items-center justify-center overflow-hidden rounded-[1.5rem] bg-gradient-to-br ${product.color} p-8 text-white`}>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_26%_24%,rgb(255_255_255/0.24),transparent_28%),linear-gradient(145deg,rgb(255_255_255/0.12),transparent_48%)]" />
+          <div className="relative flex min-h-[28rem] items-center justify-center overflow-hidden rounded-[1.5rem] bg-[linear-gradient(135deg,#0F172A,#111827_48%,#A8844F)] p-8 text-white">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_26%_24%,rgb(214_185_140/0.30),transparent_28%),linear-gradient(145deg,rgb(255_255_255/0.12),transparent_48%)]" />
             <div className="absolute right-5 top-5 flex flex-wrap gap-2">
               {product.featured ? <span className="badge bg-primary/80 text-white backdrop-blur">مميز</span> : null}
               {product.discountPercent > 0 ? <span className="badge bg-accent text-white">خصم {product.discountPercent}%</span> : null}
             </div>
-            <div className="relative grid h-44 w-44 place-items-center rounded-[2rem] border border-white/35 bg-white/15 text-5xl font-black shadow-lift backdrop-blur">
+            <div className="relative grid h-44 w-44 place-items-center rounded-[2rem] border border-secondary/35 bg-white/15 text-5xl font-black text-[#f7ead2] shadow-lift backdrop-blur">
               {product.categoryName.slice(0, 2)}
             </div>
           </div>
@@ -61,7 +61,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
               <Star className="h-4 w-4 fill-accent text-accent" aria-hidden="true" />
               تقييم {product.rating}
             </span>
-            <span className={isLowStock ? "inline-flex items-center gap-2 rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm font-black text-rose-700" : "inline-flex items-center gap-2 rounded-2xl border border-teal-100 bg-teal-50 px-4 py-3 text-sm font-black text-teal-700"}>
+            <span className={isLowStock ? "inline-flex items-center gap-2 rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm font-black text-rose-700" : "inline-flex items-center gap-2 rounded-2xl border border-secondary/25 bg-[#fbf7ef] px-4 py-3 text-sm font-black text-[#73572f]"}>
               <PackageCheck className="h-4 w-4" aria-hidden="true" />
               {isLowStock ? `كمية محدودة: ${product.stock}` : `متوفر: ${product.stock}`}
             </span>
@@ -98,7 +98,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
           <div className="mt-7 grid gap-3 sm:grid-cols-2">
             {product.specs.map((spec) => (
               <div key={spec} className="flex items-center gap-3 rounded-2xl border border-border bg-white px-4 py-3 text-sm font-black text-slate-700 shadow-soft">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-secondary" aria-hidden="true" />
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-dark-gold" aria-hidden="true" />
                 {spec}
               </div>
             ))}
@@ -121,7 +121,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
 function InfoPill({ Icon, title }: { Icon: LucideIcon; title: string }) {
   return (
     <div className="flex items-center gap-2 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-black text-slate-700">
-      <Icon className="h-4 w-4 text-secondary" aria-hidden="true" />
+      <Icon className="h-4 w-4 text-dark-gold" aria-hidden="true" />
       {title}
     </div>
   );

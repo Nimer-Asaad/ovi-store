@@ -76,7 +76,7 @@ function AdminPriceRow({
   value: string;
   highlight?: "danger" | "success";
 }) {
-  const color = highlight === "danger" ? "text-rose-700" : highlight === "success" ? "text-teal-700" : "text-primary";
+  const color = highlight === "danger" ? "text-rose-700" : highlight === "success" ? "text-dark-gold" : "text-primary";
 
   return (
     <div className="flex items-center justify-between gap-3 border-b border-slate-200/80 pb-1.5 last:border-b-0 last:pb-0">

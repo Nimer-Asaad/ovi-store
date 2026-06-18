@@ -15,7 +15,7 @@ export default function RegisterPage() {
           <button className="btn-primary h-12">إنشاء الحساب</button>
         </form>
         <p className="mt-5 text-sm font-bold text-muted">
-          لديك حساب؟ <Link href="/login" className="text-teal-700">تسجيل الدخول</Link>
+          لديك حساب؟ <Link href="/login" className="text-dark-gold">تسجيل الدخول</Link>
         </p>
       </section>
     </div>

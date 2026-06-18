@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { categories } from "@/data/mock";
@@ -23,8 +24,11 @@ export function MobileMenu() {
         <div className="fixed inset-0 z-50 bg-slate-950/45 backdrop-blur-sm">
           <div className="mr-auto flex h-full w-[86%] max-w-sm flex-col rounded-r-[2rem] bg-white p-5 shadow-lift">
             <div className="flex items-center justify-between">
-              <Link href="/" className="text-2xl font-black tracking-normal text-primary" onClick={() => setOpen(false)}>
-                OVI Store
+              <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+                <span className="relative flex h-12 w-12 overflow-hidden rounded-2xl border border-secondary/30 bg-primary">
+                  <Image src="/images/ovi-logo.png" alt="Ovi Mobile Store" fill sizes="48px" className="object-cover" />
+                </span>
+                <span className="text-xl font-black tracking-normal text-primary">Ovi Mobile Store</span>
               </Link>
               <button
                 type="button"
@@ -44,7 +48,7 @@ export function MobileMenu() {
                 ["حسابي", "/account"],
                 ["لوحة الإدارة", "/admin"],
               ].map(([label, href]) => (
-                <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl border-b border-slate-100 px-3 py-3 text-slate-800 transition hover:bg-slate-50">
+                <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl border-b border-slate-100 px-3 py-3 text-slate-800 transition hover:bg-[#fbf7ef] hover:text-[#73572f]">
                   {label}
                 </Link>
               ))}
@@ -58,7 +62,7 @@ export function MobileMenu() {
                     key={category.slug}
                     href={`/categories/${category.slug}`}
                     onClick={() => setOpen(false)}
-                    className="rounded-xl bg-slate-100 px-3 py-2 text-sm font-bold text-slate-800"
+                    className="rounded-xl bg-[#fbf7ef] px-3 py-2 text-sm font-bold text-[#73572f]"
                   >
                     {category.name}
                   </Link>

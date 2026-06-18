@@ -17,7 +17,7 @@ export default function LoginPage() {
           <button className="btn-secondary h-12">دخول</button>
         </form>
         <p className="mt-5 text-sm font-bold text-muted">
-          لا تملك حسابا؟ <Link href="/register" className="text-teal-700">إنشاء حساب</Link>
+          لا تملك حسابا؟ <Link href="/register" className="text-dark-gold">إنشاء حساب</Link>
         </p>
       </section>
     </div>

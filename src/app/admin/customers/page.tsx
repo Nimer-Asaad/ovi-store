@@ -61,9 +61,9 @@ export default function AdminCustomersPage() {
                     <td className="p-4">{formatPrice(customer.totalSpent)}</td>
                     <td className="p-4">
                       <div className="flex flex-wrap gap-2">
-                        <button type="button" className="rounded-lg bg-secondary px-3 py-2 text-xs font-black text-white hover:bg-teal-700">اعتماد</button>
+                        <button type="button" className="rounded-lg bg-secondary px-3 py-2 text-xs font-black text-primary hover:bg-accent">اعتماد</button>
                         <button type="button" className="rounded-lg border border-rose-200 px-3 py-2 text-xs font-black text-rose-700 hover:bg-rose-50">رفض</button>
-                        <button type="button" className="rounded-lg border border-border px-3 py-2 text-xs font-black text-slate-700 hover:border-teal-300">حفظ</button>
+                        <button type="button" className="rounded-lg border border-border px-3 py-2 text-xs font-black text-slate-700 hover:border-secondary">حفظ</button>
                       </div>
                     </td>
                   </tr>

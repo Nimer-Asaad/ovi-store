@@ -8,8 +8,11 @@
   --muted: #64748b;
   --border: #e2e8f0;
   --primary: #0f172a;
-  --secondary: #14b8a6;
-  --accent: #f59e0b;
+  --navy-surface: #111827;
+  --soft-navy: #1e293b;
+  --secondary: #c8a97e;
+  --accent: #d6b98c;
+  --dark-gold: #a8844f;
   --radius-sm: 0.625rem;
   --radius-md: 0.875rem;
   --radius-lg: 1.25rem;
@@ -27,8 +30,11 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-primary: var(--primary);
+  --color-navy-surface: var(--navy-surface);
+  --color-soft-navy: var(--soft-navy);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
+  --color-dark-gold: var(--dark-gold);
   --font-sans: var(--font-cairo), "Cairo", "Tahoma", sans-serif;
   --font-mono: "Consolas", monospace;
   --radius-card: var(--radius-lg);
@@ -50,7 +56,7 @@ body {
   min-height: 100vh;
   background:
     linear-gradient(180deg, rgb(248 250 252 / 0.96), #f8fafc 280px),
-    radial-gradient(circle at top right, rgb(20 184 166 / 0.09), transparent 34rem);
+    radial-gradient(circle at top right, rgb(200 169 126 / 0.12), transparent 34rem);
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
@@ -58,7 +64,7 @@ body {
 
 ::selection {
   background: var(--secondary);
-  color: white;
+  color: var(--primary);
 }
 
 button,
@@ -105,7 +111,7 @@ th {
   .btn-primary {
     @apply inline-flex h-11 items-center justify-center gap-2 px-5 text-sm font-black text-white transition;
     border-radius: var(--radius-md);
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--soft-navy));
     box-shadow: 0 10px 25px rgb(15 23 42 / 0.14);
   }
 
@@ -119,18 +125,19 @@ th {
   .btn-ghost:focus-visible,
   .form-control:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 4px rgb(20 184 166 / 0.16), 0 10px 25px rgb(15 23 42 / 0.10);
+    box-shadow: 0 0 0 4px rgb(200 169 126 / 0.22), 0 10px 25px rgb(15 23 42 / 0.10);
   }
 
   .btn-secondary {
-    @apply inline-flex h-11 items-center justify-center gap-2 px-5 text-sm font-black text-white transition;
+    @apply inline-flex h-11 items-center justify-center gap-2 px-5 text-sm font-black transition;
     border-radius: var(--radius-md);
-    background: var(--secondary);
-    box-shadow: 0 10px 25px rgb(20 184 166 / 0.18);
+    color: var(--primary);
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    box-shadow: 0 10px 25px rgb(168 132 79 / 0.18);
   }
 
   .btn-secondary:hover {
-    background: #0f9f92;
+    background: linear-gradient(135deg, var(--dark-gold), var(--secondary));
     transform: translateY(-1px);
   }
 
@@ -143,22 +150,22 @@ th {
   }
 
   .btn-ghost:hover {
-    border-color: rgb(20 184 166 / 0.35);
-    color: #0f766e;
-    background: #f0fdfa;
+    border-color: rgb(200 169 126 / 0.5);
+    color: var(--dark-gold);
+    background: #fbf7ef;
   }
 
   .btn-soft {
     @apply inline-flex h-11 items-center justify-center gap-2 px-5 text-sm font-black transition;
     border: 1px solid rgb(226 232 240 / 0.9);
     border-radius: var(--radius-md);
-    color: #0f766e;
-    background: #f0fdfa;
+    color: var(--primary);
+    background: #fbf7ef;
   }
 
   .btn-soft:hover {
-    border-color: rgb(20 184 166 / 0.45);
-    background: #ccfbf1;
+    border-color: rgb(200 169 126 / 0.55);
+    background: #f4eadb;
     transform: translateY(-1px);
   }
 
@@ -174,8 +181,9 @@ th {
     border-radius: 999px;
     font-size: 0.75rem;
     font-weight: 900;
-    color: #0f766e;
-    background: #ccfbf1;
+    color: #73572f;
+    background: #f4eadb;
+    border: 1px solid rgb(200 169 126 / 0.28);
   }
 
   .badge-accent {
@@ -185,8 +193,9 @@ th {
     border-radius: 999px;
     font-size: 0.75rem;
     font-weight: 900;
-    color: #92400e;
-    background: #fef3c7;
+    color: #6f4f1f;
+    background: #f7ead2;
+    border: 1px solid rgb(168 132 79 / 0.25);
   }
 
   .form-control {
@@ -198,7 +207,7 @@ th {
 
   .form-control:focus {
     border-color: var(--secondary);
-    box-shadow: 0 0 0 4px rgb(20 184 166 / 0.12);
+    box-shadow: 0 0 0 4px rgb(200 169 126 / 0.16);
   }
 
   .form-control::placeholder {

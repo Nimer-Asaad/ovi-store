@@ -101,13 +101,13 @@ export default async function Home() {
                 <Link
                   key={category.slug}
                   href={`/categories/${category.slug}`}
-                  className="surface-card group p-5 transition duration-300 hover:-translate-y-1 hover:border-secondary/40 hover:shadow-card"
+                  className="surface-card group p-5 transition duration-300 hover:-translate-y-1 hover:border-secondary/50 hover:shadow-card"
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-100 text-primary transition group-hover:bg-secondary group-hover:text-white">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#fbf7ef] text-[#73572f] transition group-hover:bg-secondary group-hover:text-primary">
                       <Icon className="h-6 w-6" aria-hidden="true" />
                     </span>
-                    <span className="badge bg-teal-50 text-teal-700">{category.count} منتج</span>
+                    <span className="badge bg-[#fbf7ef] text-[#73572f]">{category.count} منتج</span>
                   </div>
                   <h3 className="mt-5 text-xl font-black text-primary">{category.name}</h3>
                   <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted">{category.description}</p>
@@ -153,7 +153,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="overflow-hidden rounded-[1.75rem] border border-border bg-primary text-white shadow-lift">
+        <section className="overflow-hidden rounded-[1.75rem] border border-slate-800 bg-[linear-gradient(135deg,#0F172A,#111827_55%,#1E293B)] text-white shadow-lift">
           <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="border-b border-white/10 p-7 sm:p-9 lg:border-b-0 lg:border-l">
               <span className="badge bg-white text-primary">نظام بيع منظم</span>

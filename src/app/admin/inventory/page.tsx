@@ -47,7 +47,7 @@ export default function AdminInventoryPage() {
                         </span>
                       </td>
                       <td className="p-4">
-                        <Link href={`/admin/products/${product.id}/edit`} className="font-black text-teal-700 hover:text-teal-900">
+                        <Link href={`/admin/products/${product.id}/edit`} className="font-black text-dark-gold hover:text-primary">
                           تعديل المخزون
                         </Link>
                       </td>

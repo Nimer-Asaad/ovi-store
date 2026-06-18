@@ -11,7 +11,7 @@ export default async function ProductsPage() {
   return (
     <main className="app-container flex flex-col gap-8 py-8 sm:py-10">
       <section className="overflow-hidden rounded-[1.75rem] border border-border bg-white shadow-card">
-        <div className="grid gap-6 bg-primary p-6 text-white sm:p-8 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="grid gap-6 bg-[linear-gradient(135deg,#0F172A,#111827_58%,#1E293B)] p-6 text-white sm:p-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <span className="badge bg-white text-primary">كل المنتجات</span>
             <h1 className="mt-4 text-3xl font-black leading-tight sm:text-5xl">
@@ -37,7 +37,7 @@ export default async function ProductsPage() {
               <Link
                 key={category.slug}
                 href={`/categories/${category.slug}`}
-                className="shrink-0 rounded-full border border-border bg-slate-50 px-4 py-2 text-sm font-bold text-slate-700 transition hover:border-secondary/40 hover:bg-teal-50 hover:text-teal-700"
+                className="shrink-0 rounded-full border border-border bg-slate-50 px-4 py-2 text-sm font-bold text-slate-700 transition hover:border-secondary/50 hover:bg-[#fbf7ef] hover:text-[#73572f]"
               >
                 {category.name}
               </Link>

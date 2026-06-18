@@ -19,7 +19,7 @@ export function AdminStatCard({
           <p className="mt-2 text-3xl font-black text-primary">{value}</p>
           <p className="mt-2 text-sm text-muted">{hint}</p>
         </div>
-        <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-teal-700">
+        <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fbf7ef] text-[#73572f]">
           <Icon className="h-6 w-6" aria-hidden="true" />
         </span>
       </div>

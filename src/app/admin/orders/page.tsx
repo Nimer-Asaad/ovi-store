@@ -39,11 +39,11 @@ export default function AdminOrdersPage() {
                     <td className="p-4">{order.date}</td>
                     <td className="p-4">{order.items}</td>
                     <td className="p-4">{formatPrice(order.total)}</td>
-                    <td className="p-4 text-teal-700">{formatPrice(getOrderProfit(order))}</td>
+                    <td className="p-4 text-dark-gold">{formatPrice(getOrderProfit(order))}</td>
                     <td className="p-4"><OrderStatusBadge status={order.status} /></td>
                     <td className="p-4"><OrderStatusSelect defaultValue={order.status} /></td>
                     <td className="p-4">
-                      <Link href={`/admin/orders/${order.id}`} className="font-black text-teal-700 hover:text-teal-900">
+                      <Link href={`/admin/orders/${order.id}`} className="font-black text-dark-gold hover:text-primary">
                         مراجعة
                       </Link>
                     </td>
