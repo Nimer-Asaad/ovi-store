@@ -3,14 +3,14 @@ import { ArrowLeft, PackageCheck, Sparkles } from "lucide-react";
 import { notFound } from "next/navigation";
 import { ProductGrid } from "@/components/ProductGrid";
 import { categories, getCategory, mockProducts } from "@/data/mock";
-import { getCurrentDemoRole } from "@/lib/demo-user";
+import { getCurrentUser } from "@/lib/auth";
 
 export function generateStaticParams() {
   return categories.map((category) => ({ slug: category.slug }));
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
-  const role = await getCurrentDemoRole();
+  const currentUser = await getCurrentUser();
   const { slug } = await params;
   const category = getCategory(slug);
 
@@ -62,7 +62,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
-      <ProductGrid title={`منتجات ${category.name}`} products={products} role={role} />
+      <ProductGrid title={`منتجات ${category.name}`} products={products} viewer={currentUser} />
     </main>
   );
 }

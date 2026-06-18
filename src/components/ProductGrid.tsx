@@ -1,18 +1,18 @@
 import { PackageOpen } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
 import type { Product } from "@/data/mock";
-import type { DemoViewerRole } from "@/lib/demo-user";
+import type { PricingViewer } from "@/lib/pricing";
 
 export function ProductGrid({
   title,
   subtitle,
   products,
-  role,
+  viewer,
 }: {
   title: string;
   subtitle?: string;
   products: Product[];
-  role: DemoViewerRole;
+  viewer: PricingViewer;
 }) {
   return (
     <section>
@@ -27,7 +27,7 @@ export function ProductGrid({
       {products.length > 0 ? (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => (
-            <ProductCard key={product.slug} product={product} role={role} />
+            <ProductCard key={product.slug} product={product} viewer={viewer} />
           ))}
         </div>
       ) : (

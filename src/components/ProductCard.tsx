@@ -3,11 +3,11 @@ import type { ReactNode } from "react";
 import { ArrowLeft, PackageCheck, ShoppingCart, Star, Warehouse } from "lucide-react";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import type { Product } from "@/data/mock";
-import type { DemoViewerRole } from "@/lib/demo-user";
+import type { PricingViewer } from "@/lib/pricing";
 
-export function ProductCard({ product, role }: { product: Product; role: DemoViewerRole }) {
+export function ProductCard({ product, viewer }: { product: Product; viewer: PricingViewer }) {
   const isLowStock = product.stock <= product.lowStockThreshold;
-  const showWholesaleBadge = role === "MERCHANT" || role === "DEALER" || role === "ADMIN";
+  const showWholesaleBadge = viewer?.role === "MERCHANT" || viewer?.role === "DEALER" || viewer?.role === "ADMIN";
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-[1.35rem] border border-border bg-white shadow-soft transition duration-300 hover:-translate-y-1 hover:border-secondary/50 hover:shadow-card">
@@ -53,7 +53,7 @@ export function ProductCard({ product, role }: { product: Product; role: DemoVie
         </div>
 
         <div className="mt-auto pt-4">
-          <PriceDisplay product={product} role={role} />
+          <PriceDisplay product={product} viewer={viewer} />
           <div className="mt-5 grid grid-cols-[1fr_auto] gap-2">
             <button type="button" className="btn-primary w-full">
               <ShoppingCart className="h-4 w-4" aria-hidden="true" />

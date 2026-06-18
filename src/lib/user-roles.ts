@@ -14,5 +14,12 @@ export const roleLabels: Record<UserRole | "GUEST", string> = {
   SUPPLIER: "مورد",
 };
 
+export const priceGroupLabels: Record<"RETAIL" | "WHOLESALE" | "DEALER" | "VIP", string> = {
+  RETAIL: "تجزئة",
+  WHOLESALE: "جملة",
+  DEALER: "وكيل",
+  VIP: "VIP",
+};
+
 export const isUserRole = (value: string | undefined): value is UserRole =>
   Boolean(value && userRoles.includes(value as UserRole));

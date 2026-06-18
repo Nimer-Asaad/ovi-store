@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, Minus, PackageCheck, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import { formatPrice, mockProducts } from "@/data/mock";
-import { getCurrentDemoRole } from "@/lib/demo-user";
+import { getCurrentUser } from "@/lib/auth";
 import { getVisibleUnitPrice } from "@/lib/pricing";
 
 const cartItems = mockProducts.filter((product) => product.visible).slice(0, 3).map((product, index) => ({
@@ -11,8 +11,8 @@ const cartItems = mockProducts.filter((product) => product.visible).slice(0, 3).
 }));
 
 export default async function CartPage() {
-  const role = await getCurrentDemoRole();
-  const total = cartItems.reduce((sum, item) => sum + getVisibleUnitPrice(item.product, role).finalAmount * item.quantity, 0);
+  const currentUser = await getCurrentUser();
+  const total = cartItems.reduce((sum, item) => sum + getVisibleUnitPrice(item.product, currentUser).finalAmount * item.quantity, 0);
 
   return (
     <main className="app-container py-8 sm:py-10">
@@ -36,7 +36,7 @@ export default async function CartPage() {
           </div>
           <div className="grid gap-4">
             {cartItems.map(({ product, quantity }) => {
-              const lineTotal = getVisibleUnitPrice(product, role).finalAmount * quantity;
+              const lineTotal = getVisibleUnitPrice(product, currentUser).finalAmount * quantity;
 
               return (
                 <article key={product.slug} className="grid gap-4 rounded-[1.25rem] border border-border bg-white p-4 shadow-soft sm:grid-cols-[7rem_1fr_auto] sm:items-center">
@@ -52,7 +52,7 @@ export default async function CartPage() {
                       {product.name}
                     </Link>
                     <div className="mt-3">
-                      <PriceDisplay product={product} role={role} variant="line" />
+                      <PriceDisplay product={product} viewer={currentUser} variant="line" />
                     </div>
                     <div className="mt-4 flex flex-wrap items-center gap-3">
                       <div className="flex h-10 items-center rounded-2xl border border-border bg-slate-50 p-1">

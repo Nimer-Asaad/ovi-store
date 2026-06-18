@@ -1,18 +1,30 @@
+import "server-only";
+
 import type { Product } from "@/data/mock";
-import type { DemoViewerRole } from "@/lib/demo-user";
+import type { AuthUser } from "@/lib/auth";
 
 export type PriceKind = "retailPrice" | "wholesalePrice" | "dealerPrice";
 
-export function getBasePriceForRole(product: Product, role: DemoViewerRole): {
+export type PricingViewer = Pick<AuthUser, "role" | "isApproved"> | null;
+
+export function getBasePriceForViewer(product: Product, viewer: PricingViewer): {
   amount: number;
   kind: PriceKind;
   label: string;
 } {
-  if (role === "MERCHANT") {
+  if (!viewer?.isApproved) {
+    return { amount: product.retailPrice, kind: "retailPrice", label: "سعر التجزئة" };
+  }
+
+  if (viewer.role === "ADMIN") {
+    return { amount: product.retailPrice, kind: "retailPrice", label: "سعر التجزئة" };
+  }
+
+  if (viewer.role === "MERCHANT") {
     return { amount: product.wholesalePrice, kind: "wholesalePrice", label: "سعر التاجر" };
   }
 
-  if (role === "DEALER") {
+  if (viewer.role === "DEALER") {
     return {
       amount: product.dealerPrice ?? product.wholesalePrice,
       kind: product.dealerPrice ? "dealerPrice" : "wholesalePrice",
@@ -31,8 +43,8 @@ export function applyDiscount(amount: number, discountPercent: number) {
   return Math.round(amount * (1 - discountPercent / 100));
 }
 
-export function getVisibleUnitPrice(product: Product, role: DemoViewerRole) {
-  const base = getBasePriceForRole(product, role);
+export function getVisibleUnitPrice(product: Product, viewer: PricingViewer) {
+  const base = getBasePriceForViewer(product, viewer);
 
   return {
     ...base,

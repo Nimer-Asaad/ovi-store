@@ -1,22 +1,24 @@
 import { formatPrice, type Product } from "@/data/mock";
-import type { DemoViewerRole } from "@/lib/demo-user";
+import type { PricingViewer } from "@/lib/pricing";
 import { getProfitMargin, getVisibleUnitPrice } from "@/lib/pricing";
 import { roleLabels } from "@/lib/user-roles";
 
 export function PriceDisplay({
   product,
-  role,
+  viewer,
   variant = "card",
 }: {
   product: Product;
-  role: DemoViewerRole;
+  viewer: PricingViewer;
   variant?: "card" | "details" | "line";
 }) {
-  const price = getVisibleUnitPrice(product, role);
-  const isAdmin = role === "ADMIN";
-  const margin = getProfitMargin(product);
+  const price = getVisibleUnitPrice(product, viewer);
+  const isAdmin = viewer?.role === "ADMIN" && viewer.isApproved;
+  const roleLabel = viewer?.role ? roleLabels[viewer.role] : roleLabels.GUEST;
 
   if (isAdmin) {
+    const margin = getProfitMargin(product);
+
     return (
       <div className={variant === "line" ? "grid gap-2" : "grid gap-3"}>
         <div className="grid gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-sm">
@@ -50,7 +52,7 @@ export function PriceDisplay({
     <div className={variant === "details" ? "rounded-3xl border border-border bg-white p-5 shadow-soft" : "grid gap-2"}>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-xs font-black text-muted">{price.label}</p>
-        <span className="badge bg-slate-100 text-slate-700">{roleLabels[role]}</span>
+        <span className="badge bg-slate-100 text-slate-700">{roleLabel}</span>
       </div>
       <div className="mt-2 flex flex-wrap items-end gap-2">
         <p className={variant === "details" ? "text-4xl font-black leading-none text-primary" : "text-2xl font-black leading-none text-primary"}>

@@ -5,14 +5,14 @@ import { notFound } from "next/navigation";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import { ProductGrid } from "@/components/ProductGrid";
 import { getProduct, mockProducts } from "@/data/mock";
-import { getCurrentDemoRole } from "@/lib/demo-user";
+import { getCurrentUser } from "@/lib/auth";
 
 export function generateStaticParams() {
   return mockProducts.filter((product) => product.visible).map((product) => ({ slug: product.slug }));
 }
 
 export default async function ProductDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
-  const role = await getCurrentDemoRole();
+  const currentUser = await getCurrentUser();
   const { slug } = await params;
   const product = getProduct(slug);
 
@@ -74,7 +74,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
           </div>
 
           <div className="mt-7">
-            <PriceDisplay product={product} role={role} variant="details" />
+            <PriceDisplay product={product} viewer={currentUser} variant="details" />
           </div>
 
           <div className="mt-7 grid gap-3 rounded-3xl border border-border bg-slate-50 p-4 sm:grid-cols-[auto_1fr] sm:items-center">
@@ -111,7 +111,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
           title="منتجات مشابهة"
           subtitle="خيارات قريبة من نفس القسم لتسهيل المقارنة وإكمال الطلب."
           products={related}
-          role={role}
+          viewer={currentUser}
         />
       ) : null}
     </main>

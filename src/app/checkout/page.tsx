@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight, CreditCard, MapPin, PackageCheck, Phone, UserRound } from "lucide-react";
 import { formatPrice, mockProducts } from "@/data/mock";
-import { getCurrentDemoRole } from "@/lib/demo-user";
+import { getCurrentUser } from "@/lib/auth";
 import { getVisibleUnitPrice } from "@/lib/pricing";
 
 const customerFields = [
@@ -16,9 +16,9 @@ const shippingFields = [
 ];
 
 export default async function CheckoutPage() {
-  const role = await getCurrentDemoRole();
+  const currentUser = await getCurrentUser();
   const checkoutItems = mockProducts.filter((product) => product.visible).slice(0, 3);
-  const total = checkoutItems.reduce((sum, product) => sum + getVisibleUnitPrice(product, role).finalAmount, 0);
+  const total = checkoutItems.reduce((sum, product) => sum + getVisibleUnitPrice(product, currentUser).finalAmount, 0);
   const shipping = 20;
 
   return (
@@ -87,7 +87,7 @@ export default async function CheckoutPage() {
 
         <aside className="surface-panel h-fit p-5 sm:p-6 lg:sticky lg:top-32">
           <h2 className="text-xl font-black text-primary">ملخص الطلب</h2>
-          <p className="mt-2 text-sm leading-7 text-muted">الأسعار المعروضة تعتمد على نوع الحساب التجريبي الحالي.</p>
+          <p className="mt-2 text-sm leading-7 text-muted">الأسعار المعروضة تعتمد على نوع الحساب الحالي.</p>
           <div className="mt-5 grid gap-3 border-t border-border pt-5">
             {checkoutItems.map((product) => (
               <div key={product.slug} className="grid grid-cols-[3.5rem_1fr_auto] items-center gap-3">
@@ -98,7 +98,7 @@ export default async function CheckoutPage() {
                   <p className="truncate text-sm font-black text-primary">{product.name}</p>
                   <p className="mt-1 text-xs font-bold text-muted">{product.categoryName}</p>
                 </div>
-                <span className="text-sm font-black text-primary">{formatPrice(getVisibleUnitPrice(product, role).finalAmount)}</span>
+                <span className="text-sm font-black text-primary">{formatPrice(getVisibleUnitPrice(product, currentUser).finalAmount)}</span>
               </div>
             ))}
           </div>

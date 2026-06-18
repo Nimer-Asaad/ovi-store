@@ -20,7 +20,7 @@ import {
 import { HeroSection } from "@/components/HeroSection";
 import { ProductCard } from "@/components/ProductCard";
 import { categories, mockProducts } from "@/data/mock";
-import { getCurrentDemoRole } from "@/lib/demo-user";
+import { getCurrentUser } from "@/lib/auth";
 
 const categoryIcons = {
   "phone-cases": ShieldCheck,
@@ -63,7 +63,7 @@ const valueProps = [
 const brands = ["MagShield", "GlassPro", "GaN Pro", "AirBeat", "PowerHub", "SmartFit"];
 
 export default async function Home() {
-  const role = await getCurrentDemoRole();
+  const currentUser = await getCurrentUser();
   const featured = mockProducts.filter((product) => product.visible && product.featured);
   const newProducts = mockProducts.filter((product) => product.visible).slice(0, 4);
   const bestSelling = mockProducts
@@ -126,7 +126,7 @@ export default async function Home() {
                   الأكثر طلبا هذا الأسبوع
                 </h2>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-muted sm:text-base">
-                  مجموعة جاهزة للعرض بأسعار تتغير تلقائيا حسب نوع الحساب التجريبي الحالي.
+                  مجموعة جاهزة للعرض بأسعار تتغير تلقائيا حسب نوع الحساب الحالي.
                 </p>
               </div>
               <div className="flex gap-2 overflow-x-auto pb-1">
@@ -148,7 +148,7 @@ export default async function Home() {
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {featured.map((product) => (
-              <ProductCard key={product.slug} product={product} role={role} />
+              <ProductCard key={product.slug} product={product} viewer={currentUser} />
             ))}
           </div>
         </section>
@@ -212,7 +212,7 @@ export default async function Home() {
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {newProducts.slice(0, 2).map((product) => (
-                <ProductCard key={product.slug} product={product} role={role} />
+                <ProductCard key={product.slug} product={product} viewer={currentUser} />
               ))}
             </div>
           </div>
@@ -229,7 +229,7 @@ export default async function Home() {
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {bestSelling.slice(0, 2).map((product) => (
-                <ProductCard key={product.slug} product={product} role={role} />
+                <ProductCard key={product.slug} product={product} viewer={currentUser} />
               ))}
             </div>
           </div>

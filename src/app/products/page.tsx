@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Filter, SlidersHorizontal, Sparkles } from "lucide-react";
 import { ProductGrid } from "@/components/ProductGrid";
 import { categories, mockProducts } from "@/data/mock";
-import { getCurrentDemoRole } from "@/lib/demo-user";
+import { getCurrentUser } from "@/lib/auth";
 
 export default async function ProductsPage() {
-  const role = await getCurrentDemoRole();
+  const currentUser = await getCurrentUser();
   const visibleProducts = mockProducts.filter((product) => product.visible);
 
   return (
@@ -18,7 +18,7 @@ export default async function ProductsPage() {
               كتالوج اكسسوارات الموبايل
             </h1>
             <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
-              تشكيلة منظمة للجملة والتجزئة مع أسعار تتغير حسب نوع الحساب التجريبي، ومخزون واضح لكل منتج.
+              تشكيلة منظمة للجملة والتجزئة مع أسعار تتغير حسب نوع الحساب الفعلي، ومخزون واضح لكل منتج.
             </p>
           </div>
           <div className="grid grid-cols-3 gap-3 rounded-3xl border border-white/10 bg-white/[0.06] p-3 text-center">
@@ -64,7 +64,7 @@ export default async function ProductsPage() {
         title="المنتجات المتاحة"
         subtitle="كل الأصناف الأساسية لمتجر اكسسوارات موبايل عربي، بتصميم واضح ومناسب للتصفح السريع على الموبايل."
         products={visibleProducts}
-        role={role}
+        viewer={currentUser}
       />
     </main>
   );
